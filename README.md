@@ -1,5 +1,5 @@
 # Just PoC
-While buing product on Alza.cz this extension will check product price on Heureka.cz and prompt you to buy product on it instead.
+While buing product on Alza.cz this extension will check product price on Heureka.cz and prompt you to buy product on it instead. But only if the product is cheaper on Heureka.
 
 ## How to install to Chrome
 1. Download repository as ZIP file
