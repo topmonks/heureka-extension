@@ -1,0 +1,41 @@
+{
+    "name": "heureka-poc",
+    "version": "0.0.1",
+    "manifest_version": 2,
+    "description": "This extension was created with the awesome extensionizr.com",
+    "homepage_url": "http://topmonks.com",
+    "icons": {
+        "16": "icons/icon16.png",
+        "48": "icons/icon48.png",
+        "128": "icons/icon128.png"
+    },
+    "default_locale": "en",
+    "background": {
+        "scripts": ["js/library.js", "src/bg/background.js"],
+        "persistent": true
+    },
+    "permissions": [
+        "https://www.heureka.cz/*",
+        "https://www.alza.cz/*",
+        "https://www.mall.cz/*",
+        "https://www.czc.cz/*"
+    ],
+    "content_scripts": [
+        {
+            "matches": [
+                "https://www.alza.cz/*",
+                "https://www.mall.cz/*",
+                "https://www.czc.cz/*"
+            ],
+            "css": ["src/inject/inject.css"]
+        },
+        {
+            "matches": [
+                "https://www.alza.cz/*",
+                "https://www.mall.cz/*",
+                "https://www.czc.cz/*"
+            ],
+            "js": ["src/inject/inject.js"]
+        }
+    ]
+}
