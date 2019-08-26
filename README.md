@@ -4,7 +4,17 @@ While buying product on Alza.cz this extension will check product price on Heure
 ## How it works
 1. script ktery bezi na strance, detekuje navstevu detailu produktu a odesila jeho nazev scriptu ktery bezi v rozsireni (protoze rozsireni potrebuje tahat data z jineho webu a CORS policy toto neumoznuje)
 2. script rozsireni, ktery (na zaklade nazvu produktu) vraci vysledky hledani produktu na heurece
-3. script na webu Alzy (popr. dalsich eshopu), ktery srovna ceny produktu se ziskanymi vysledky hledani na Heurece. V pripade ze najde levnejsi variantu, nabidne uzivateli opustit eshop a nakupu uskutecnit na Heurece  
+3. script na webu Alzy (popr. dalsich eshopu), ktery srovna ceny produktu se ziskanymi vysledky hledani na Heurece. V pripade ze najde levnejsi variantu, nabidne uzivateli opustit eshop a nakupu uskutecnit na Heurece
+
+### Heureka API
+Heureka does not provide a public API so we are using Heureka's search suggestions to find products.
+But there is a **limitation**: We cannot guarantee that found product can be ordered on Heureka. 
+
+#### Search suggestions
+```
+GET https://www.heureka.cz/direct/ajax/search-suggester?term=:query
+```
+
 
 ## How to install to Chrome
 1. Download repository as ZIP file
@@ -18,3 +28,4 @@ While buying product on Alza.cz this extension will check product price on Heure
 ## Issues
 - [ ] With parsing prices of some product with action price
 - [ ] Works only on product detail
+- [ ] Prompts even if it is not possible to buy such product on Heureka
