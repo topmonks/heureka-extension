@@ -11,7 +11,7 @@ chrome.extension.sendMessage({}, function(response) {
 const scrapeProductName = () => document.querySelector('h1').innerText;
 const scrapeProductPrice = () => {
     const element = document.querySelector('.price_withVat');
-    return element ? parseFloat(element.innerText.replace(',-', '')) : null;
+    return element ? parsePrice(element.innerText) : null;
 };
 
 // Works just on Alza.cz for now
@@ -48,7 +48,7 @@ async function liveTimeBaby() {
         productName,
     );
 
-    const heurekaPrice = parseFloat(foundProduct.price.replace('Kč', ''));
+    const heurekaPrice = parsePrice(foundProduct.price);
 
     console.log({ productName, productPrice, heurekaPrice });
 
@@ -74,4 +74,42 @@ function callToBackgroundScript(query, payload) {
     return new Promise(resolve => {
         chrome.extension.sendMessage({ query, payload }, resolve);
     });
+}
+
+/**
+ * parse-price - returns a Number from a localized price string
+ *
+ * @version 1.1.8
+ * @link https://github.com/caiogondim/parse-price.js#readme
+ * @author Caio Gondim
+ * @license MIT
+ */
+function parsePrice(string) {
+    function t(e) {
+        return e.replace(/[^\d]/g, '');
+    }
+    function n(e) {
+        return e.replace(/[^\d.,]/g, '').replace(/[.,]$/, '');
+    }
+    function o(e) {
+        for (
+            var r = n(e), t = '0' === r[r.length - 1], o = r.length;
+            o > 0;
+            o--
+        ) {
+            if (r.length - o + 1 > 3 && t) return;
+            var i = r[o - 1];
+            if (-1 !== [',', '.'].indexOf(i)) return i;
+        }
+    }
+    function _parsePrice(e) {
+        var r = String(e),
+            n = '00',
+            i = o(r);
+        i && (n = r.split(i)[1]);
+        var f = r.split(i)[0];
+        return Number(t(f) + '.' + t(n));
+    }
+
+    return _parsePrice(string);
 }
