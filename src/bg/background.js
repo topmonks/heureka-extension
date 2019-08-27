@@ -15,28 +15,24 @@ chrome.extension.onMessage.addListener((request, sender, sendResponse) => {
 async function callToHeureka(query, payload) {
     switch (query) {
         case 'Najdi mi prosimtě tohle zbožíčko': {
-            return await searchProductOnHeureka(payload);
+            return await searchProductsOnHeureka(payload);
         }
     }
 }
 
-async function searchProductOnHeureka(term) {
+async function searchProductsOnHeureka(term) {
     // Hack: Using Heureka's autocomplete suggestions
     const result = await fetch(
         `https://www.heureka.cz/direct/ajax/search-suggester?term=${term}`,
     );
 
     const {
-        products: {
-            // only firstProduct can be relevant ...
-            result: [firstProduct],
-        },
+        products: { result: foundProducts },
     } = await result.json();
+    console.log('Products found on Heureka', foundProducts);
 
-    console.log('This is first found product', firstProduct);
+    const relevantProducts = foundProducts.filter(({ score }) => score > 10500);
+    console.log('Hopefully relevant products', relevantProducts);
 
-    // ... but only if the name is similar to searched term
-    return window.areThoseNamesSimilar(term, firstProduct.name, 0.75)
-        ? firstProduct
-        : null;
+    return relevantProducts;
 }

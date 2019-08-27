@@ -43,7 +43,8 @@ async function liveTimeBaby() {
         return;
     }
 
-    const foundProduct = await callToBackgroundScript(
+    // Background script returns array of found product but we use just the first one for now
+    const [foundProduct] = await callToBackgroundScript(
         'Najdi mi prosimtě tohle zbožíčko',
         productName,
     );

@@ -11,7 +11,7 @@
     },
     "default_locale": "en",
     "background": {
-        "scripts": ["js/string-similarity.js", "src/bg/background.js"],
+        "scripts": ["src/bg/background.js"],
         "persistent": true
     },
     "permissions": [
