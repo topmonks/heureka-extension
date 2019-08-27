@@ -48,6 +48,11 @@ async function liveTimeBaby() {
         productName,
     );
 
+    if (!foundProduct) {
+        console.log('No product found.', productName);
+        return;
+    }
+
     const heurekaPrice = parsePrice(foundProduct.price);
 
     console.log({ productName, productPrice, heurekaPrice });
