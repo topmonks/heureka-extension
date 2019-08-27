@@ -8,9 +8,16 @@ chrome.extension.sendMessage({}, function(response) {
     }, 10);
 });
 
+// Works just on Alza.cz for now
 const scrapeProductName = () => document.querySelector('h1').innerText;
 const scrapeProductPrice = () => {
-    const element = document.querySelector('.price_withVat');
+    let element = document.querySelector('.price_withVat');
+
+    if (!element) {
+        // Special price, different way how to display price
+        element = document.querySelector('#prices .c2');
+    }
+
     return element ? parsePrice(element.innerText) : null;
 };
 
