@@ -26,6 +26,6 @@ GET https://www.heureka.cz/direct/ajax/search-suggester?term=:query
 
 
 ## Issues
-- [ ] With parsing prices of some product with action price
+- [x] With parsing prices of some product with action price
 - [ ] Works only on product detail
 - [ ] Prompts even if it is not possible to buy such product on Heureka
