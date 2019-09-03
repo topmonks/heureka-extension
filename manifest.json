@@ -1,8 +1,8 @@
 {
-    "name": "heureka-poc",
+    "name": "Heureka by TopMonks",
     "version": "0.0.1",
     "manifest_version": 2,
-    "description": "This extension was created with the awesome extensionizr.com",
+    "description": "Ověřuje cenu zboží na Heureka.cz",
     "homepage_url": "https://github.com/topmonks/heureka-extension",
     "icons": {
         "16": "icons/icon16.png",
