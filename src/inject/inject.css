@@ -4,10 +4,6 @@
     background-color: #fff;
 }
 
-.HeurekaBox--dimmed {
-    opacity: 0.6;
-}
-
 .HeurekaBox__Title {
     color: #ff7a04;
     font-family: Arial;
@@ -15,6 +11,20 @@
     font-weight: normal;
     font-size: 14px;
     line-height: 16px;
+}
+
+.HeurekaBox__Title--no-result {
+    font-family: Arial;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 40px;
+
+    color: #000000;
+}
+.HeurekaBox__Title--no-result svg {
+    float: left;
+    margin-right: 16px;
 }
 
 .HeurekaBox__ProductName {
@@ -80,7 +90,7 @@
     position: absolute;
     left: 5px;
     top: 8px;
-    background: url(https://im9.cz/css-v2/images/product/cart-ico-sprite.svg)
+    background: url(chrome-extension://olnkjbjkebekdmobjidelaphiolneejc/icons/card.png)
             4px 7px no-repeat,
         none;
     transition: left 1s;

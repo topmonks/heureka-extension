@@ -80,24 +80,24 @@ const makeHeurekaBox = ({ product, productIsNotCheaper }) => {
 
     box.classList.add('HeurekaBox');
 
-    if (!product || productIsNotCheaper) {
-        box.classList.add('HeurekaBox--dimmed');
-    }
-
     const title = document.createElement('span');
     title.classList.add('HeurekaBox__Title');
 
     if (!product) {
-        title.innerText = 'Produkt jsme na Heurece nenašli.';
+        title.classList.add('HeurekaBox__Title--no-result');
+        title.innerHTML = `${sadSmileIcon}Produkt jsme na Heurece nenašli`;
         box.appendChild(title);
         return box;
     }
 
     if (productIsNotCheaper) {
-        title.innerText = 'Levnější variantu jsme na Heurece nenašli.';
-    } else {
-        title.innerText = 'Produkt je na Heurece levnejší!';
+        title.classList.add('HeurekaBox__Title--no-result');
+        title.innerHTML = `${sadSmileIcon}Produkt na Heurece není levnější `;
+        box.appendChild(title);
+        return box;
     }
+
+    title.innerText = 'Produkt je na Heurece levnejší!';
 
     const productName = document.createElement('h2');
     productName.innerText = product.name;
@@ -139,6 +139,13 @@ const scrapeProductPrice = () => {
 
     return element ? parsePrice(element.innerText) : null;
 };
+
+const sadSmileIcon = `<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M19.9997 36.6666C29.2044 36.6666 36.6663 29.2047 36.6663 20C36.6663 10.7952 29.2044 3.33331 19.9997 3.33331C10.7949 3.33331 3.33301 10.7952 3.33301 20C3.33301 29.2047 10.7949 36.6666 19.9997 36.6666Z" stroke="#F18032" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M26.6663 26.6667C26.6663 26.6667 24.1663 23.3333 19.9997 23.3333C15.833 23.3333 13.333 26.6667 13.333 26.6667" stroke="#F18032" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M15 15H15.0167" stroke="#F18032" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M25 15H25.0167" stroke="#F18032" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>`;
 
 /**
  * parse-price - returns a Number from a localized price string
