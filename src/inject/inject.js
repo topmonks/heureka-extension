@@ -141,11 +141,12 @@ const scrapeProductPrice = () => {
 };
 
 const sadSmileIcon = `<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M19.9997 36.6666C29.2044 36.6666 36.6663 29.2047 36.6663 20C36.6663 10.7952 29.2044 3.33331 19.9997 3.33331C10.7949 3.33331 3.33301 10.7952 3.33301 20C3.33301 29.2047 10.7949 36.6666 19.9997 36.6666Z" stroke="#F18032" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M26.6663 26.6667C26.6663 26.6667 24.1663 23.3333 19.9997 23.3333C15.833 23.3333 13.333 26.6667 13.333 26.6667" stroke="#F18032" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M15 15H15.0167" stroke="#F18032" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M25 15H25.0167" stroke="#F18032" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>`;
+<path d="M20.0002 36.6667C29.2049 36.6667 36.6668 29.2048 36.6668 20C36.6668 10.7953 29.2049 3.33334 20.0002 3.33334C10.7954 3.33334 3.3335 10.7953 3.3335 20C3.3335 29.2048 10.7954 36.6667 20.0002 36.6667Z" stroke="#FF7A04" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M13.3335 25H26.6668" stroke="#FF7A04" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M15 15H15.0167" stroke="#FF7A04" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M25 15H25.0167" stroke="#FF7A04" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+`;
 
 /**
  * parse-price - returns a Number from a localized price string

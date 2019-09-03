@@ -1,15 +1,17 @@
 .HeurekaBox {
-    border: 2px solid #3e9bce;
+    border: 2px solid #FF7A04;
     padding: 24px;
     background-color: #fff;
+
+    box-shadow: 2px 10px 23px rgba(92, 95, 255, 0.1);
 }
 
 .HeurekaBox__Title {
     color: #ff7a04;
     font-family: Arial;
     font-style: normal;
-    font-weight: normal;
-    font-size: 14px;
+    font-weight: bold;
+    font-size: 20px;
     line-height: 16px;
 }
 
@@ -31,7 +33,7 @@
     font-family: Arial;
     font-style: normal;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 16px;
     line-height: 23px;
 
     color: #000000;
@@ -44,6 +46,8 @@
     font-size: 14px;
     line-height: 18px;
 
+    padding-bottom: 4px;
+
     color: #595959;
 }
 
@@ -51,10 +55,12 @@
     font-family: Arial;
     font-style: normal;
     font-weight: bold;
-    font-size: 20px;
-    line-height: 23px;
+    font-size: 24px;
+    line-height: 54px;
 
-    color: #000000;
+    float: right;
+
+    color: #FF7A04;
 }
 
 .HeurekaBox__Button {
@@ -81,6 +87,10 @@
     text-decoration: none;
 
     color: #ffffff !important;
+}
+
+.HeurekaBox__Button:hover{
+  background: #EE671F;
 }
 
 .HeurekaBox__ButtonIcon {
