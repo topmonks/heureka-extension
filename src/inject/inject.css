@@ -1,3 +1,84 @@
-/**
- * Place your custom CSS styles here.
- **/
+.AlzaSucksBox {
+    border: 2px solid #3e9bce;
+    padding: 24px;
+    background-color: #fff;
+}
+
+.AlzaSucksBox__Title {
+    color: #ff7a04;
+    font-family: Arial;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+}
+
+.AlzaSucksBox__ProductName {
+    font-family: Arial;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 23px;
+
+    color: #000000;
+}
+
+.AlzaSucksBox__ProducDescription {
+    font-family: Arial;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 18px;
+
+    color: #595959;
+}
+
+.AlzaSucksBox__ProductPrice {
+    font-family: Arial;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 23px;
+
+    color: #000000;
+}
+
+.AlzaSucksBox__Button {
+    position: relative;
+
+    display: inline-block;
+
+    padding-left: 38px;
+    margin-right: 16px;
+
+    width: 211px;
+    height: 54px;
+    line-height: 50px;
+
+    background: #f18032;
+    border: 2px solid #e06e36;
+    box-sizing: border-box;
+    border-radius: 4px;
+
+    font-family: Arial;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    text-decoration: none;
+
+    color: #ffffff;
+}
+
+.AlzaSucksBox__ButtonIcon {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    left: 5px;
+    top: 8px;
+    background: url(https://im9.cz/css-v2/images/product/cart-ico-sprite.svg)
+            4px 7px no-repeat,
+        none;
+    transition: left 1s;
+    transition-delay: 0.1s;
+}
