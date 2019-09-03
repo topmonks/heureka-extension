@@ -21,12 +21,16 @@ GET https://www.heureka.cz/direct/ajax/search-suggester?term=:query
 
 
 ## How to install to Chrome
+[Download it as Unlisted Chrome extension](https://chrome.google.com/webstore/detail/icpjojolkooiemcfjcdajjmeemmakdnn/)
+or
+
 1. Download repository as ZIP file
 2. Extract ZIP
 3. Open new Chrome tab and go to `chrome://extensions/`
 4. In the right corner turn on the Developer mode
 5. Press "Load Unpacked" button and select extracted directory
 6. Goto [alza.cz](https://alza.cz) and try it out
+
 
 
 ## Issues
