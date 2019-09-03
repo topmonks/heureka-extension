@@ -30,7 +30,7 @@ async function liveTimeBaby() {
         ? parsePrice(foundProduct.price)
         : Infinity;
 
-    console.log({ productName, productPrice, heurekaPrice });
+    if (productPrice) console.log({ productName, productPrice, heurekaPrice });
 
     const productIsNotCheaper = heurekaPrice >= productPrice;
 
@@ -64,6 +64,9 @@ function callToBackgroundScript(query, payload) {
 const makeHeurekaRoot = () => {
     // 1. find place above buy button
     const originBuyButtonContainer = document.getElementById('pricec');
+
+    if (!originBuyButtonContainer) return null;
+
     // 2. create box container
     const heurekaContainer = document.createElement('div');
     heurekaContainer.classList.add('HeurekaContainer'); // easy to read, mby use some encryption to impair detection?
