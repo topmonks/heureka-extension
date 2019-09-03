@@ -90,7 +90,7 @@
     position: absolute;
     left: 5px;
     top: 8px;
-    background: url(chrome-extension://olnkjbjkebekdmobjidelaphiolneejc/icons/card.png)
+    background: url(https://im9.cz/css-v2/images/product/cart-ico-sprite.svg)
             4px 7px no-repeat,
         none;
     transition: left 1s;
