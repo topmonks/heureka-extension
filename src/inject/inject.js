@@ -24,22 +24,26 @@ async function liveTimeBaby() {
 
     if (!foundProduct) {
         console.log('No product found.', productName);
-        return;
     }
 
-    const heurekaPrice = parsePrice(foundProduct.price);
+    const heurekaPrice = foundProduct
+        ? parsePrice(foundProduct.price)
+        : Infinity;
 
     console.log({ productName, productPrice, heurekaPrice });
 
-    if (heurekaPrice >= productPrice) {
-        // mby show cheaper to show extenaion works?
+    const productIsNotCheaper = heurekaPrice >= productPrice;
+
+    if (productIsNotCheaper) {
         console.log('Product is not cheaper');
-        return;
     }
 
     const boxRoot = makeHeurekaRoot();
     if (boxRoot) {
-        const box = makeHeurekaBox({ product: foundProduct });
+        const box = makeHeurekaBox({
+            product: foundProduct,
+            productIsNotCheaper,
+        });
         boxRoot.appendChild(box);
     }
 }
@@ -68,14 +72,29 @@ const makeHeurekaRoot = () => {
 
     return heurekaContainer;
 };
-const makeHeurekaBox = ({ product }) => {
+const makeHeurekaBox = ({ product, productIsNotCheaper }) => {
     const box = document.createElement('div');
 
     box.classList.add('HeurekaBox');
 
+    if (!product || productIsNotCheaper) {
+        box.classList.add('HeurekaBox--dimmed');
+    }
+
     const title = document.createElement('span');
-    title.innerText = 'Produkt je na Heurece levnejší!';
     title.classList.add('HeurekaBox__Title');
+
+    if (!product) {
+        title.innerText = 'Produkt jsme na Heurece nenašli.';
+        box.appendChild(title);
+        return box;
+    }
+
+    if (productIsNotCheaper) {
+        title.innerText = 'Levnější variantu jsme na Heurece nenašli.';
+    } else {
+        title.innerText = 'Produkt je na Heurece levnejší!';
+    }
 
     const productName = document.createElement('h2');
     productName.innerText = product.name;

@@ -4,6 +4,10 @@
     background-color: #fff;
 }
 
+.HeurekaBox--dimmed {
+    opacity: 0.6;
+}
+
 .HeurekaBox__Title {
     color: #ff7a04;
     font-family: Arial;
