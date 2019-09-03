@@ -1,10 +1,10 @@
-.AlzaSucksBox {
+.HeurekaBox {
     border: 2px solid #3e9bce;
     padding: 24px;
     background-color: #fff;
 }
 
-.AlzaSucksBox__Title {
+.HeurekaBox__Title {
     color: #ff7a04;
     font-family: Arial;
     font-style: normal;
@@ -13,7 +13,7 @@
     line-height: 16px;
 }
 
-.AlzaSucksBox__ProductName {
+.HeurekaBox__ProductName {
     font-family: Arial;
     font-style: normal;
     font-weight: bold;
@@ -23,7 +23,7 @@
     color: #000000;
 }
 
-.AlzaSucksBox__ProducDescription {
+.HeurekaBox__ProducDescription {
     font-family: Arial;
     font-style: normal;
     font-weight: normal;
@@ -33,7 +33,7 @@
     color: #595959;
 }
 
-.AlzaSucksBox__ProductPrice {
+.HeurekaBox__ProductPrice {
     font-family: Arial;
     font-style: normal;
     font-weight: bold;
@@ -43,7 +43,7 @@
     color: #000000;
 }
 
-.AlzaSucksBox__Button {
+.HeurekaBox__Button {
     position: relative;
 
     display: inline-block;
@@ -69,7 +69,7 @@
     color: #ffffff;
 }
 
-.AlzaSucksBox__ButtonIcon {
+.HeurekaBox__ButtonIcon {
     display: inline-block;
     width: 30px;
     height: 30px;

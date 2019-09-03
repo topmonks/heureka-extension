@@ -37,9 +37,9 @@ async function liveTimeBaby() {
         return;
     }
 
-    const boxRoot = makeAlzaSucksRoot();
+    const boxRoot = makeHeurekaRoot();
     if (boxRoot) {
-        const box = makeAlzaSucksBox({ product: foundProduct });
+        const box = makeHeurekaBox({ product: foundProduct });
         boxRoot.appendChild(box);
     }
 }
@@ -54,45 +54,45 @@ function callToBackgroundScript(query, payload) {
  *  Shop page (DOM) modificators
  *  Works just on Alza.cz for now
  *
- *  AlzaSucks = extension namespace
+ *  Heureka = extension namespace
  */
 
-const makeAlzaSucksRoot = () => {
+const makeHeurekaRoot = () => {
     // 1. find place above buy button
     const originBuyButtonContainer = document.getElementById('pricec');
     // 2. create box container
-    const alzaSucksContainer = document.createElement('div');
-    alzaSucksContainer.classList.add('AlzaSucksContainer'); // easy to read, mby use some encryption to impair detection?
+    const heurekaContainer = document.createElement('div');
+    heurekaContainer.classList.add('HeurekaContainer'); // easy to read, mby use some encryption to impair detection?
     // 3. paste box container above found button
-    originBuyButtonContainer.prepend(alzaSucksContainer);
+    originBuyButtonContainer.prepend(heurekaContainer);
 
-    return alzaSucksContainer;
+    return heurekaContainer;
 };
-const makeAlzaSucksBox = ({ product }) => {
+const makeHeurekaBox = ({ product }) => {
     const box = document.createElement('div');
 
-    box.classList.add('AlzaSucksBox');
+    box.classList.add('HeurekaBox');
 
     const title = document.createElement('span');
     title.innerText = 'Produkt je na Heurece levnejší!';
-    title.classList.add('AlzaSucksBox__Title');
+    title.classList.add('HeurekaBox__Title');
 
     const productName = document.createElement('h2');
     productName.innerText = product.name;
-    productName.classList.add('AlzaSucksBox__ProductName');
+    productName.classList.add('HeurekaBox__ProductName');
 
     const productDescription = document.createElement('p');
     productDescription.innerText = product.short_description;
-    productDescription.classList.add('AlzaSucksBox__ProductDescription');
+    productDescription.classList.add('HeurekaBox__ProductDescription');
 
     const productPrice = document.createElement('span');
     productPrice.innerText = product.price;
-    productPrice.classList.add('AlzaSucksBox__ProductPrice');
+    productPrice.classList.add('HeurekaBox__ProductPrice');
 
     const button = document.createElement('a');
     button.innerHTML =
-        '<i class="AlzaSucksBox__ButtonIcon"></i>Zobrazit na Heurece';
-    button.classList.add('AlzaSucksBox__Button');
+        '<i class="HeurekaBox__ButtonIcon"></i>Zobrazit na Heurece';
+    button.classList.add('HeurekaBox__Button');
     button.setAttribute('href', product.desktop_url);
     button.setAttribute('target', '_blank');
 
