@@ -85,7 +85,7 @@ const makeHeurekaBox = ({ product, productIsNotCheaper }) => {
 
     if (!product) {
         title.classList.add('HeurekaBox__Title--no-result');
-        title.innerHTML = `${sadSmileIcon}Produkt jsme na Heurece nenašli`;
+        title.innerHTML = `${sadSmileIcon}Srovnání cen tohoto produktu není na Heurece dostupné`;
         box.appendChild(title);
         return box;
     }
