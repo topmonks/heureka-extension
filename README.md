@@ -1,6 +1,9 @@
 # Just PoC
 While buying product on Alza.cz this extension will check product price on Heureka.cz and prompt you to buy product on it instead. But only if it's cheaper...
 
+![example](https://raw.githubusercontent.com/topmonks/heureka-extension/master/example.png?token=AAJPV7YVRTUGQT5ACW2TVCC5O5M3C)
+
+
 ## How it works
 1. script ktery bezi na strance, detekuje navstevu detailu produktu a odesila jeho nazev scriptu ktery bezi v rozsireni (protoze rozsireni potrebuje tahat data z jineho webu a CORS policy toto neumoznuje)
 2. script rozsireni, ktery (na zaklade nazvu produktu) vraci vysledky hledani produktu na heurece
