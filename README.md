@@ -1,7 +1,7 @@
 # Just PoC
 While buying product on Alza.cz this extension will check product price on Heureka.cz and prompt you to buy product on it instead. But only if it's cheaper...
 
-![example](https://raw.githubusercontent.com/topmonks/heureka-extension/master/example.png?token=AAJPV7YVRTUGQT5ACW2TVCC5O5M3C)
+![example](https://github.com/topmonks/heureka-extension/raw/master/example.png)
 
 
 ## How it works
