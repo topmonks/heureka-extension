@@ -1,8 +1,8 @@
 {
-    "name": "Heureka by TopMonks",
-    "version": "0.0.3",
+    "name": "Heureka na Alze",
+    "version": "0.0.4",
     "manifest_version": 2,
-    "description": "Ověřuje cenu zboží na Heureka.cz",
+    "description": "Když nejde Alza na Heureku, musí jít Heureka na Alzu",
     "homepage_url": "https://github.com/topmonks/heureka-extension",
     "icons": {
         "16": "icons/icon16.png",
@@ -14,19 +14,10 @@
         "scripts": ["src/bg/background.js"],
         "persistent": true
     },
-    "permissions": [
-        "https://www.heureka.cz/*",
-        "https://www.alza.cz/*",
-        "https://www.mall.cz/*",
-        "https://www.czc.cz/*"
-    ],
+    "permissions": ["https://www.alza.cz/*"],
     "content_scripts": [
         {
-            "matches": [
-                "https://www.alza.cz/*",
-                "https://www.mall.cz/*",
-                "https://www.czc.cz/*"
-            ],
+            "matches": ["https://www.alza.cz/*"],
             "js": ["src/inject/inject.js"],
             "css": ["src/inject/inject.css"]
         }
