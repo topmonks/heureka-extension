@@ -1,6 +1,6 @@
 {
     "name": "Heuréka na Alze",
-    "version": "0.0.6",
+    "version": "0.0.7",
     "manifest_version": 2,
     "description": "Když nejde Alza na Heureku, musí jít Heureka na Alzu.",
     "homepage_url": "https://github.com/topmonks/heureka-extension",
