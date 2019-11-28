@@ -1,28 +1,25 @@
 {
-    "name": "Heuréka na Alze",
-    "version": "0.0.7",
-    "manifest_version": 2,
-    "description": "Když nejde Alza na Heureku, musí jít Heureka na Alzu.",
-    "homepage_url": "https://github.com/topmonks/heureka-extension",
-    "icons": {
-        "16": "icons/icon16.png",
-        "64": "icons/icon64.png",
-        "128": "icons/icon128.png"
-    },
-    "default_locale": "en",
-    "background": {
-        "scripts": ["src/bg/background.js"],
-        "persistent": true
-    },
-    "permissions": [
-        "https://www.alza.cz/*",
-        "https://www.heureka.cz/direct/ajax/search-suggester"
-    ],
-    "content_scripts": [
-        {
-            "matches": ["https://www.alza.cz/*"],
-            "js": ["src/inject/inject.js"],
-            "css": ["src/inject/inject.css"]
-        }
-    ]
+  "name": "Heuréka na Alze",
+  "version": "0.0.7",
+  "manifest_version": 2,
+  "description": "Když nejde Alza na Heureku, musí jít Heureka na Alzu.",
+  "homepage_url": "https://github.com/topmonks/heureka-extension",
+  "icons": {
+    "16": "icons/icon16.png",
+    "64": "icons/icon64.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": ["src/bg/background.js"],
+    "persistent": true
+  },
+  "permissions": ["https://www.alza.cz/*", "https://api.heureka.cz/*"],
+  "content_scripts": [
+    {
+      "matches": ["https://www.alza.cz/*"],
+      "js": ["src/inject/inject.js"],
+      "css": ["src/inject/inject.css"]
+    }
+  ]
 }
