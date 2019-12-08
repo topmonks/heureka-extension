@@ -1,57 +1,61 @@
 chrome.extension.sendMessage({}, function(response) {
-    var readyStateCheckInterval = setInterval(function() {
-        if (document.readyState === 'complete') {
-            clearInterval(readyStateCheckInterval);
-            liveTimeBaby();
-        }
-    }, 10);
+  var readyStateCheckInterval = setInterval(function() {
+    if (document.readyState === "complete") {
+      clearInterval(readyStateCheckInterval);
+      liveTimeBaby();
+    }
+  }, 10);
 });
 
 async function liveTimeBaby() {
-    const productName = scrapeProductName();
-    const productPrice = scrapeProductPrice();
+  const productName = scrapeProductName();
+  const productPrice = scrapeProductPrice();
 
-    if (!productName) {
-        console.log('Product name not found.');
-        return;
-    }
+  if (!productName) {
+    console.log("Product name not found.");
+    return;
+  }
 
-    // get products
-    const foundProducts = await callToBackgroundScript(
-        'Najdi mi prosimtě tohle zbožíčko',
-        productName,
-    );
+  // get products
+  const foundProducts = await callToBackgroundScript(
+    "Najdi mi prosimtě tohle zbožíčko",
+    productName
+  );
 
-    if (!foundProducts.length) {
-        console.log('No products found.', productName);
-    }
+  if (!foundProducts.length) {
+    console.log("No products found.", productName);
+  }
 
-    const heurekaPrices = foundProducts.length > 0
-        ? foundProducts.map(product => parsePrice(product.price))
-        : [];
+  const heurekaPrices =
+    foundProducts.length > 0
+      ? foundProducts.map(product => parsePrice(product.price))
+      : [];
 
-    if (productPrice) console.log({ productName, productPrice, heurekaPrices, foundProducts });
+  if (productPrice)
+    console.log({ productName, productPrice, heurekaPrices, foundProducts });
 
-    const productsAreNotCheaper = Boolean(heurekaPrices.find(price => price >= productPrice));
+  const productsAreNotCheaper = Boolean(
+    heurekaPrices.find(price => price >= productPrice)
+  );
 
-    if (productsAreNotCheaper) {
-        console.log('Products are not cheaper');
-    }
+  if (productsAreNotCheaper) {
+    console.log("Products are not cheaper");
+  }
 
-    const boxRoot = makeHeurekaRoot();
-    if (boxRoot) {
-        const box = makeHeurekaBox({
-            products: foundProducts,
-            productsAreNotCheaper,
-        });
-        boxRoot.appendChild(box);
-    }
+  const boxRoot = makeHeurekaRoot();
+  if (boxRoot) {
+    const box = makeHeurekaBox({
+      products: foundProducts,
+      productsAreNotCheaper,
+    });
+    boxRoot.appendChild(box);
+  }
 }
 
 function callToBackgroundScript(query, payload) {
-    return new Promise(resolve => {
-        chrome.extension.sendMessage({ query, payload }, resolve);
-    });
+  return new Promise(resolve => {
+    chrome.extension.sendMessage({ query, payload }, resolve);
+  });
 }
 
 /**
@@ -62,85 +66,85 @@ function callToBackgroundScript(query, payload) {
  */
 
 const makeHeurekaRoot = () => {
-    // 1. find place above buy button
-    const originBuyButtonContainer = document.getElementById('pricec');
+  // 1. find place above buy button
+  const originBuyButtonContainer = document.getElementById("pricec");
 
-    if (!originBuyButtonContainer) return null;
+  if (!originBuyButtonContainer) return null;
 
-    // 2. create box container
-    const heurekaContainer = document.createElement('div');
-    heurekaContainer.classList.add('HeurekaContainer'); // easy to read, mby use some encryption to impair detection?
-    // 3. paste box container above found button
-    originBuyButtonContainer.prepend(heurekaContainer);
+  // 2. create box container
+  const heurekaContainer = document.createElement("div");
+  heurekaContainer.classList.add("HeurekaContainer"); // easy to read, mby use some encryption to impair detection?
+  // 3. paste box container above found button
+  originBuyButtonContainer.prepend(heurekaContainer);
 
-    return heurekaContainer;
+  return heurekaContainer;
 };
 const makeHeurekaBox = ({ products, productsAreNotCheaper }) => {
-    const box = document.createElement('div');
+  const box = document.createElement("div");
 
-    box.classList.add('HeurekaBox');
+  box.classList.add("HeurekaBox");
 
-    const title = document.createElement('span');
-    title.classList.add('HeurekaBox__Title');
+  const title = document.createElement("span");
+  title.classList.add("HeurekaBox__Title");
 
-    if (!products.length) {
-        title.classList.add('HeurekaBox__Title--no-result');
-        title.innerHTML = `${sadSmileIcon}Srovnání cen tohoto produktu není na Heurece dostupné`;
-        box.appendChild(title);
-        // TODO add link to verify manually
-        return box;
-    }
-
-    if (productsAreNotCheaper) {
-        title.classList.add('HeurekaBox__Title--no-result');
-        title.innerHTML = `${sadSmileIcon}Produkt na Heurece není levnější `;
-        box.appendChild(title);
-        // return box; DO not return, show list anyway
-    }
-
-    title.innerText = 'Produkt je na Heurece levnejší!';
-
-    for (const product of products) {
-        const productName = document.createElement('h2');
-        productName.innerText = product.name;
-        productName.classList.add('HeurekaBox__ProductName');
-
-        const productDescription = document.createElement('p');
-        productDescription.innerText = product.short_description;
-        productDescription.classList.add('HeurekaBox__ProductDescription');
-
-        const productPrice = document.createElement('span');
-        productPrice.innerText = product.price;
-        productPrice.classList.add('HeurekaBox__ProductPrice');
-
-        const button = document.createElement('a');
-        button.innerHTML =
-            '<i class="HeurekaBox__ButtonIcon"></i>Zobrazit na Heurece';
-        button.classList.add('HeurekaBox__Button');
-        button.setAttribute('href', product.desktop_url);
-        button.setAttribute('target', '_blank');
-
-        // Yeah, old fashion style
-        box.appendChild(title);
-        box.appendChild(productName);
-        box.appendChild(productDescription);
-        box.appendChild(button);
-        box.appendChild(productPrice);
-    }
-
+  if (!products.length) {
+    title.classList.add("HeurekaBox__Title--no-result");
+    title.innerHTML = `${sadSmileIcon}Srovnání cen tohoto produktu není na Heurece dostupné`;
+    box.appendChild(title);
+    // TODO add link to verify manually
     return box;
+  }
+
+  if (productsAreNotCheaper) {
+    title.classList.add("HeurekaBox__Title--no-result");
+    title.innerHTML = `${sadSmileIcon}Produkt na Heurece není levnější `;
+    box.appendChild(title);
+    // return box; DO not return, show list anyway
+  }
+
+  title.innerText = "Produkt je na Heurece levnejší!";
+
+  for (const product of products) {
+    const productName = document.createElement("h2");
+    productName.innerText = product.name;
+    productName.classList.add("HeurekaBox__ProductName");
+
+    const productDescription = document.createElement("p");
+    productDescription.innerText = product.short_description;
+    productDescription.classList.add("HeurekaBox__ProductDescription");
+
+    const productPrice = document.createElement("span");
+    productPrice.innerText = product.price;
+    productPrice.classList.add("HeurekaBox__ProductPrice");
+
+    const button = document.createElement("a");
+    button.innerHTML =
+      '<i class="HeurekaBox__ButtonIcon"></i>Zobrazit na Heurece';
+    button.classList.add("HeurekaBox__Button");
+    button.setAttribute("href", product.desktop_url);
+    button.setAttribute("target", "_blank");
+
+    // Yeah, old fashion style
+    box.appendChild(title);
+    box.appendChild(productName);
+    box.appendChild(productDescription);
+    box.appendChild(button);
+    box.appendChild(productPrice);
+  }
+
+  return box;
 };
 
-const scrapeProductName = () => document.querySelector('h1').innerText;
+const scrapeProductName = () => document.querySelector("h1").innerText;
 const scrapeProductPrice = () => {
-    let element = document.querySelector('.price_withVat');
+  let element = document.querySelector(".price_withVat");
 
-    if (!element) {
-        // Special price, different way how to display price
-        element = document.querySelector('#prices .c2');
-    }
+  if (!element) {
+    // Special price, different way how to display price
+    element = document.querySelector("#prices .c2");
+  }
 
-    return element ? parsePrice(element.innerText) : null;
+  return element ? parsePrice(element.innerText) : null;
 };
 
 const sadSmileIcon = `<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -160,31 +164,27 @@ const sadSmileIcon = `<svg width="40" height="40" viewBox="0 0 40 40" fill="none
  * @license MIT
  */
 function parsePrice(string) {
-    function t(e) {
-        return e.replace(/[^\d]/g, '');
+  function t(e) {
+    return e.replace(/[^\d]/g, "");
+  }
+  function n(e) {
+    return e.replace(/[^\d.,]/g, "").replace(/[.,]$/, "");
+  }
+  function o(e) {
+    for (var r = n(e), t = "0" === r[r.length - 1], o = r.length; o > 0; o--) {
+      if (r.length - o + 1 > 3 && t) return;
+      var i = r[o - 1];
+      if (-1 !== [",", "."].indexOf(i)) return i;
     }
-    function n(e) {
-        return e.replace(/[^\d.,]/g, '').replace(/[.,]$/, '');
-    }
-    function o(e) {
-        for (
-            var r = n(e), t = '0' === r[r.length - 1], o = r.length;
-            o > 0;
-            o--
-        ) {
-            if (r.length - o + 1 > 3 && t) return;
-            var i = r[o - 1];
-            if (-1 !== [',', '.'].indexOf(i)) return i;
-        }
-    }
-    function _parsePrice(e) {
-        var r = String(e),
-            n = '00',
-            i = o(r);
-        i && (n = r.split(i)[1]);
-        var f = r.split(i)[0];
-        return Number(t(f) + '.' + t(n));
-    }
+  }
+  function _parsePrice(e) {
+    var r = String(e),
+      n = "00",
+      i = o(r);
+    i && (n = r.split(i)[1]);
+    var f = r.split(i)[0];
+    return Number(t(f) + "." + t(n));
+  }
 
-    return _parsePrice(string);
+  return _parsePrice(string);
 }
