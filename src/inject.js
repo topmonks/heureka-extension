@@ -46,6 +46,7 @@ async function liveTimeBaby() {
     const box = makeHeurekaBox({
       products: foundProducts,
       productsAreNotCheaper,
+      productName,
     });
     boxRoot.appendChild(box);
   }
@@ -89,7 +90,7 @@ const extensionIcon = `
 `;
 
 // Yeah, old fashion style
-const makeHeurekaBox = ({ products, productsAreNotCheaper }) => {
+const makeHeurekaBox = ({ productName, products, productsAreNotCheaper }) => {
   const box = document.createElement("div");
 
   box.classList.add("HeurekaBox");
@@ -99,16 +100,30 @@ const makeHeurekaBox = ({ products, productsAreNotCheaper }) => {
 
   if (!products.length) {
     title.classList.add("HeurekaBox__Header--no-result");
-    title.innerHTML = `Ve srovnávači jsme nenašli podobný produkt.`;
+    title.innerHTML = `Ve srovnávači jsme nenašli podobný produkt`;
+
+    const text = document.createElement("p");
+    text.classList.add("HeurekaBox__NotFound");
+
+    text.innerHTML = `Srovnejte jiný produkt, <a href="https://www.heureka.cz/?h[fraze]=${productName}">nebo ho vyhledejte manuálně</a>.`;
+
     box.appendChild(title);
-    // TODO add link to verify manually
+    box.appendChild(text);
+
     return box;
   }
 
   if (productsAreNotCheaper) {
     title.classList.add("HeurekaBox__Title--no-result");
-    title.innerHTML = `Cena tohoto produktu je ve srovnávači vyšší.`;
+    title.innerHTML = `Cena tohoto produktu je ve srovnávači vyšší`;
+
+    const text = document.createElement("p");
+    text.classList.add("HeurekaBox__NotFound");
+
+    text.innerHTML = `Přesvědčte se sami <a href="https://www.heureka.cz/?h[fraze]=${productName}">přímo ve srovnávači</a>.`;
+
     box.appendChild(title);
+    box.appendChild(text);
     return box;
   }
 
