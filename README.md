@@ -1,4 +1,4 @@
-# Just PoC
+# Porovnavac cen
 While buying product on Alza.cz this extension will check product price on Heureka.cz and prompt you to buy product on it instead. But only if it's cheaper...
 
 ![example](https://github.com/topmonks/heureka-extension/raw/master/example.png)
@@ -16,12 +16,12 @@ But there is a **limitation**: We cannot guarantee that found product can be ord
 
 #### Search suggestions
 ```
-GET https://www.heureka.cz/direct/ajax/search-suggester?term=:query
+GET https://api.heureka.cz/head-gateway/search?term=:query
 ```
 
 
 ## How to install to Chrome
-[Download it as Unlisted Chrome extension](https://chrome.google.com/webstore/detail/icpjojolkooiemcfjcdajjmeemmakdnn/)
+[Download it as Unlisted Chrome extension](https://chrome.google.com/webstore/detail/jmhkgcmmgjblnkjkbgjggkaeifacakgi)
 or
 
 1. Download repository as ZIP file
