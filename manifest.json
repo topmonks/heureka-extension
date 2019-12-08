@@ -11,15 +11,15 @@
   },
   "default_locale": "en",
   "background": {
-    "scripts": ["src/bg/background.js"],
+    "scripts": ["src/background.js"],
     "persistent": true
   },
   "permissions": ["https://www.alza.cz/*", "https://api.heureka.cz/*"],
   "content_scripts": [
     {
       "matches": ["https://www.alza.cz/*"],
-      "js": ["src/inject/inject.js"],
-      "css": ["src/inject/inject.css"]
+      "js": ["src/inject.js"],
+      "css": ["src/inject.css"]
     }
   ]
 }
