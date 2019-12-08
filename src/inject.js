@@ -84,12 +84,12 @@ const makeHeurekaBox = ({ products, productsAreNotCheaper }) => {
 
   box.classList.add("HeurekaBox");
 
-  const title = document.createElement("span");
-  title.classList.add("HeurekaBox__Title");
+  const title = document.createElement("div");
+  title.classList.add("HeurekaBox__Header");
 
   if (!products.length) {
-    title.classList.add("HeurekaBox__Title--no-result");
-    title.innerHTML = `${sadSmileIcon}Srovnání cen tohoto produktu není na Heurece dostupné`;
+    title.classList.add("HeurekaBox__Header--no-result");
+    title.innerHTML = `Ve srovnávači jsme nenašli podobný produkt`;
     box.appendChild(title);
     // TODO add link to verify manually
     return box;
@@ -97,18 +97,29 @@ const makeHeurekaBox = ({ products, productsAreNotCheaper }) => {
 
   if (productsAreNotCheaper) {
     title.classList.add("HeurekaBox__Title--no-result");
-    title.innerHTML = `${sadSmileIcon}Produkt na Heurece není levnější `;
+    title.innerHTML = `Cena tohoto produktu je ve srovnávači vyšší.`;
     box.appendChild(title);
     // return box; DO not return, show list anyway
   }
 
-  title.innerText = "Produkt je na Heurece levnejší!";
+  title.innerText = "Ve srovnávači jsme našli tyto produkty";
   box.appendChild(title);
 
+  const list = document.createElement("div");
+  list.classList.add("HeurekaBox__ProductsList");
+
   for (const product of products) {
+    const linkContainer = document.createElement("a");
+    linkContainer.classList.add("HeurekaBox__ProductsList__Item");
+    linkContainer.href = product.desktop_url;
+
     const productName = document.createElement("h2");
     productName.innerText = product.name;
     productName.classList.add("HeurekaBox__ProductName");
+
+    const productCategory = document.createElement("p");
+    productCategory.innerText = product.category_name;
+    productCategory.classList.add("HeurekaBox__ProductCategory");
 
     const productDescription = document.createElement("p");
     productDescription.innerText = product.short_description;
@@ -118,19 +129,15 @@ const makeHeurekaBox = ({ products, productsAreNotCheaper }) => {
     productPrice.innerText = product.price;
     productPrice.classList.add("HeurekaBox__ProductPrice");
 
-    const button = document.createElement("a");
-    button.innerHTML =
-      '<i class="HeurekaBox__ButtonIcon"></i>Zobrazit na Heurece';
-    button.classList.add("HeurekaBox__Button");
-    button.setAttribute("href", product.desktop_url);
-    button.setAttribute("target", "_blank");
-
     // Yeah, old fashion style
-    box.appendChild(productName);
-    box.appendChild(productDescription);
-    box.appendChild(button);
-    box.appendChild(productPrice);
+    linkContainer.appendChild(productName);
+    linkContainer.appendChild(productDescription);
+    linkContainer.appendChild(productPrice);
+
+    list.appendChild(linkContainer);
   }
+
+  box.appendChild(list);
 
   return box;
 };
@@ -146,14 +153,6 @@ const scrapeProductPrice = () => {
 
   return element ? parsePrice(element.innerText) : null;
 };
-
-const sadSmileIcon = `<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M20.0002 36.6667C29.2049 36.6667 36.6668 29.2048 36.6668 20C36.6668 10.7953 29.2049 3.33334 20.0002 3.33334C10.7954 3.33334 3.3335 10.7953 3.3335 20C3.3335 29.2048 10.7954 36.6667 20.0002 36.6667Z" stroke="#FF7A04" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M13.3335 25H26.6668" stroke="#FF7A04" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M15 15H15.0167" stroke="#FF7A04" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M25 15H25.0167" stroke="#FF7A04" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-`;
 
 /**
  * parse-price - returns a Number from a localized price string
