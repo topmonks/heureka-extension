@@ -16,33 +16,33 @@ async function liveTimeBaby() {
         return;
     }
 
-    // Background script returns array of found product but we use just the first one for now
-    const [foundProduct] = await callToBackgroundScript(
+    // get products
+    const foundProducts = await callToBackgroundScript(
         'Najdi mi prosimtě tohle zbožíčko',
         productName,
     );
 
-    if (!foundProduct) {
-        console.log('No product found.', productName);
+    if (!foundProducts.length) {
+        console.log('No products found.', productName);
     }
 
-    const heurekaPrice = foundProduct
-        ? parsePrice(foundProduct.price)
-        : Infinity;
+    const heurekaPrices = foundProducts.length > 0
+        ? foundProducts.map(product => parsePrice(product.price))
+        : [];
 
-    if (productPrice) console.log({ productName, productPrice, heurekaPrice });
+    if (productPrice) console.log({ productName, productPrice, heurekaPrices, foundProducts });
 
-    const productIsNotCheaper = heurekaPrice >= productPrice;
+    const productsAreNotCheaper = Boolean(heurekaPrices.find(price => price >= productPrice));
 
-    if (productIsNotCheaper) {
-        console.log('Product is not cheaper');
+    if (productsAreNotCheaper) {
+        console.log('Products are not cheaper');
     }
 
     const boxRoot = makeHeurekaRoot();
     if (boxRoot) {
         const box = makeHeurekaBox({
-            product: foundProduct,
-            productIsNotCheaper,
+            products: foundProducts,
+            productsAreNotCheaper,
         });
         boxRoot.appendChild(box);
     }
@@ -75,7 +75,7 @@ const makeHeurekaRoot = () => {
 
     return heurekaContainer;
 };
-const makeHeurekaBox = ({ product, productIsNotCheaper }) => {
+const makeHeurekaBox = ({ products, productsAreNotCheaper }) => {
     const box = document.createElement('div');
 
     box.classList.add('HeurekaBox');
@@ -83,47 +83,50 @@ const makeHeurekaBox = ({ product, productIsNotCheaper }) => {
     const title = document.createElement('span');
     title.classList.add('HeurekaBox__Title');
 
-    if (!product) {
+    if (!products.length) {
         title.classList.add('HeurekaBox__Title--no-result');
         title.innerHTML = `${sadSmileIcon}Srovnání cen tohoto produktu není na Heurece dostupné`;
         box.appendChild(title);
+        // TODO add link to verify manually
         return box;
     }
 
-    if (productIsNotCheaper) {
+    if (productsAreNotCheaper) {
         title.classList.add('HeurekaBox__Title--no-result');
         title.innerHTML = `${sadSmileIcon}Produkt na Heurece není levnější `;
         box.appendChild(title);
-        return box;
+        // return box; DO not return, show list anyway
     }
 
     title.innerText = 'Produkt je na Heurece levnejší!';
 
-    const productName = document.createElement('h2');
-    productName.innerText = product.name;
-    productName.classList.add('HeurekaBox__ProductName');
+    for (const product of products) {
+        const productName = document.createElement('h2');
+        productName.innerText = product.name;
+        productName.classList.add('HeurekaBox__ProductName');
 
-    const productDescription = document.createElement('p');
-    productDescription.innerText = product.short_description;
-    productDescription.classList.add('HeurekaBox__ProductDescription');
+        const productDescription = document.createElement('p');
+        productDescription.innerText = product.short_description;
+        productDescription.classList.add('HeurekaBox__ProductDescription');
 
-    const productPrice = document.createElement('span');
-    productPrice.innerText = product.price;
-    productPrice.classList.add('HeurekaBox__ProductPrice');
+        const productPrice = document.createElement('span');
+        productPrice.innerText = product.price;
+        productPrice.classList.add('HeurekaBox__ProductPrice');
 
-    const button = document.createElement('a');
-    button.innerHTML =
-        '<i class="HeurekaBox__ButtonIcon"></i>Zobrazit na Heurece';
-    button.classList.add('HeurekaBox__Button');
-    button.setAttribute('href', product.desktop_url);
-    button.setAttribute('target', '_blank');
+        const button = document.createElement('a');
+        button.innerHTML =
+            '<i class="HeurekaBox__ButtonIcon"></i>Zobrazit na Heurece';
+        button.classList.add('HeurekaBox__Button');
+        button.setAttribute('href', product.desktop_url);
+        button.setAttribute('target', '_blank');
 
-    // Yeah, old fashion style
-    box.appendChild(title);
-    box.appendChild(productName);
-    box.appendChild(productDescription);
-    box.appendChild(button);
-    box.appendChild(productPrice);
+        // Yeah, old fashion style
+        box.appendChild(title);
+        box.appendChild(productName);
+        box.appendChild(productDescription);
+        box.appendChild(button);
+        box.appendChild(productPrice);
+    }
 
     return box;
 };

@@ -33,11 +33,8 @@ async function searchProductsOnHeureka(term) {
     } = await result.json();
     console.log("Products found on Heureka", foundProducts);
 
-    // Using Heureka score. The number is magic for us, but seems to work well
-    const relevantProducts = foundProducts.filter(({ score }) => score > 10500);
-    console.log("Hopefully relevant products", relevantProducts);
-
-    return relevantProducts;
+    // return all found products
+    return foundProducts;
   } catch (error) {
     console.error(`It seems like  Heureka's API has change`);
   }
