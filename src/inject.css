@@ -5,6 +5,7 @@
 }
 
 .HeurekaBox__Header {
+  height: 24px;
   background: #7e50d3;
   padding: 16px;
   color: #fff;
@@ -12,10 +13,14 @@
   font-style: normal;
   font-weight: bold;
   font-size: 16px;
-  line-height: 18px;
+  line-height: 24px;
 }
 
 .HeurekaBox__Header--no-result {
+}
+
+.HeurekaBox__Header svg {
+  float: right;
 }
 
 .HeurekaBox__ProductsList {
