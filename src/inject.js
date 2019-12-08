@@ -79,6 +79,8 @@ const makeHeurekaRoot = () => {
 
   return heurekaContainer;
 };
+
+// Yeah, old fashion style
 const makeHeurekaBox = ({ products, productsAreNotCheaper }) => {
   const box = document.createElement("div");
 
@@ -109,9 +111,9 @@ const makeHeurekaBox = ({ products, productsAreNotCheaper }) => {
   list.classList.add("HeurekaBox__ProductsList");
 
   for (const product of products) {
-    const linkContainer = document.createElement("a");
-    linkContainer.classList.add("HeurekaBox__ProductsList__Item");
-    linkContainer.href = product.desktop_url;
+    const productImage = document.createElement("img");
+    productImage.src = product.image_url;
+    productImage.classList.add("HeurekaBox__ProductImage");
 
     const productName = document.createElement("h2");
     productName.innerText = product.name;
@@ -121,17 +123,23 @@ const makeHeurekaBox = ({ products, productsAreNotCheaper }) => {
     productCategory.innerText = product.category_name;
     productCategory.classList.add("HeurekaBox__ProductCategory");
 
-    const productDescription = document.createElement("p");
-    productDescription.innerText = product.short_description;
-    productDescription.classList.add("HeurekaBox__ProductDescription");
-
     const productPrice = document.createElement("span");
     productPrice.innerText = product.price;
     productPrice.classList.add("HeurekaBox__ProductPrice");
 
-    // Yeah, old fashion style
-    linkContainer.appendChild(productName);
-    linkContainer.appendChild(productDescription);
+    const infoColumn = document.createElement("a");
+    infoColumn.classList.add("HeurekaBox__ProductInfoColumn");
+    infoColumn.href = product.desktop_url;
+
+    infoColumn.appendChild(productName);
+    infoColumn.appendChild(productCategory);
+
+    const linkContainer = document.createElement("a");
+    linkContainer.classList.add("HeurekaBox__ProductsList__Item");
+    linkContainer.href = product.desktop_url;
+
+    linkContainer.appendChild(productImage);
+    linkContainer.appendChild(infoColumn);
     linkContainer.appendChild(productPrice);
 
     list.appendChild(linkContainer);

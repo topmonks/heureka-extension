@@ -26,10 +26,25 @@
   padding: 16px;
   background-color: #fff;
   text-decoration: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-bottom: 1px solid #ebebeb;
 }
 
 .HeurekaBox__ProductsList__Item:hover {
   background-color: #f4f4f4;
+}
+
+.HeurekaBox__ProductImage {
+  width: 48px;
+  height: 48px;
+  margin-right: 8px;
+}
+
+.HeurekaBox__ProductInfoColumn {
+  flex: 1;
+  text-decoration: none;
 }
 
 .HeurekaBox__ProductName {
@@ -40,6 +55,7 @@
   line-height: 18px;
 
   color: #000;
+  margin: 0 0 8px 0;
 }
 
 .HeurekaBox__ProductCategory {
@@ -50,18 +66,7 @@
   line-height: 16px;
 
   color: #595959;
-}
-
-.HeurekaBox__ProducDescription {
-  font-family: Arial;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 14px;
-  line-height: 18px;
-
-  padding-bottom: 4px;
-
-  color: #595959;
+  margin: 0;
 }
 
 .HeurekaBox__ProductPrice {
