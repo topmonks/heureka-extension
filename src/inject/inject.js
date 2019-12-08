@@ -103,6 +103,7 @@ const makeHeurekaBox = ({ products, productsAreNotCheaper }) => {
   }
 
   title.innerText = "Produkt je na Heurece levnejší!";
+  box.appendChild(title);
 
   for (const product of products) {
     const productName = document.createElement("h2");
@@ -125,7 +126,6 @@ const makeHeurekaBox = ({ products, productsAreNotCheaper }) => {
     button.setAttribute("target", "_blank");
 
     // Yeah, old fashion style
-    box.appendChild(title);
     box.appendChild(productName);
     box.appendChild(productDescription);
     box.appendChild(button);
