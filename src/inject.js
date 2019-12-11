@@ -149,7 +149,7 @@ const makeHeurekaBox = ({ productName, products, productsAreNotCheaper }) => {
     productCategory.classList.add("HeurekaBox__ProductCategory");
 
     const productPrice = document.createElement("span");
-    productPrice.innerText = product.price;
+    productPrice.innerText = product.price + " *";
     productPrice.classList.add("HeurekaBox__ProductPrice");
 
     const infoColumn = document.createElement("a");
@@ -171,6 +171,12 @@ const makeHeurekaBox = ({ productName, products, productsAreNotCheaper }) => {
   }
 
   box.appendChild(list);
+
+  const footer = document.createElement("p");
+  footer.classList.add("HeurekaBox__Footer");
+  footer.innerHTML = "* cena vč. DPH a nemusí být konečná";
+
+  box.appendChild(footer);
 
   return box;
 };
