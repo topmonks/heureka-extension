@@ -1,5 +1,5 @@
 # Porovnavac cen
-While buying product on Alza.cz this extension will check product price on Heureka.cz and prompt you to buy product on it instead. But only if it's cheaper...
+While buying product on Alza.cz or Alza.sk, this extension will check product price on Heureka.cz or Heureka.sk and prompt you to buy product on it instead. But only if it's cheaper...
 
 ![example](https://github.com/topmonks/heureka-extension/raw/master/example.png)
 
@@ -29,7 +29,7 @@ or
 3. Open new Chrome tab and go to `chrome://extensions/`
 4. In the right corner turn on the Developer mode
 5. Press "Load Unpacked" button and select extracted directory
-6. Goto [alza.cz](https://alza.cz) and try it out
+6. Goto [alza.cz](https://alza.cz) or [alza.sk](https://alza.sk) and try it out
 
 
 
