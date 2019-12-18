@@ -53,8 +53,11 @@ async function liveTimeBaby() {
 }
 
 function callToBackgroundScript(query, payload) {
+  const meta = {
+    hostname: location.hostname,
+  };
   return new Promise(resolve => {
-    chrome.extension.sendMessage({ query, payload }, resolve);
+    chrome.extension.sendMessage({ query, payload, meta }, resolve);
   });
 }
 
