@@ -3,9 +3,10 @@ const select = selector => document.querySelector(selector);
 const text = ehm =>
   ((typeof ehm === "string" ? select(ehm) : ehm) || {}).innerText;
 
-const create = ({ className, tag = "div" } = {}) => {
+const create = ({ className, tag = "div", style } = {}) => {
   const element = document.createElement(tag);
   if (className) element.classList.add(className);
+  if (style) element.setAttribute("style", style);
   return element;
 };
 
@@ -162,6 +163,24 @@ const __eshop_scraws = {
     },
     createRootElement: ({ className }) => {
       return append(".product-tools", { className });
+    }
+  },
+
+  alfa: {
+    get isProductPage() {
+      return Boolean(select(".prodinfo"));
+    },
+    get productName() {
+      return text("h1");
+    },
+    get productPrice() {
+      return price(".pvat");
+    },
+    createRootElement: ({ className = "" }) => {
+      return append("table.prodinfo", {
+        className,
+        style: "float: right; min-width: 400px"
+      });
     }
   },
 

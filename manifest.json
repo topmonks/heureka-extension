@@ -29,7 +29,8 @@
     "https://www.mironet.cz/*",
     "https://www.mountfield.cz/*",
     "https://www.mountfield.sk/*",
-    "https://www.tsbohemia.cz/*"
+    "https://www.tsbohemia.cz/*",
+    "https://www.alfa.cz/*"
   ],
   "content_scripts": [
     {
@@ -46,7 +47,8 @@
         "https://www.mironet.cz/*",
         "https://www.mountfield.cz/*",
         "https://www.mountfield.sk/*",
-        "https://www.tsbohemia.cz/*"
+        "https://www.tsbohemia.cz/*",
+        "https://www.alfa.cz/*"
       ],
       "js": ["src/scrawler.js", "src/inject.js"],
       "css": ["src/inject.css"]
