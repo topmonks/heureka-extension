@@ -135,6 +135,21 @@ const __eshop_scraws = {
     }
   },
 
+  mountfield: {
+    get isProductPage() {
+      return Boolean(select(".productDetail"));
+    },
+    get productName() {
+      return text("h1");
+    },
+    get productPrice() {
+      return price(".actionPrice.val");
+    },
+    createRootElement: ({ className }) => {
+      return append(".btnBuy", { className });
+    }
+  },
+
   mock: {
     get isProductPage() {
       return Boolean(select("#product-detail"));

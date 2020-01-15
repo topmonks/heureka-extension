@@ -18,7 +18,7 @@ Rozšíření vzniklo pro usnadnění vyhledávání a porovnávání cen produk
 - [x] lekarna
 - [x] mall
 - [x] mironet
-- [ ] mountfield
+- [x] mountfield
 - [ ] notino
 - [ ] rohlik
 - [ ] tsbohemia

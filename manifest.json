@@ -26,7 +26,9 @@
     "https://www.lekarna.cz/*",
     "https://www.mall.cz/*",
     "https://www.mall.sk/*",
-    "https://www.mironet.cz/*"
+    "https://www.mironet.cz/*",
+    "https://www.mountfield.cz/*",
+    "https://www.mountfield.sk/*"
   ],
   "content_scripts": [
     {
@@ -40,7 +42,9 @@
         "https://www.lekarna.cz/*",
         "https://www.mall.cz/*",
         "https://www.mall.sk/*",
-        "https://www.mironet.cz/*"
+        "https://www.mironet.cz/*",
+        "https://www.mountfield.cz/*",
+        "https://www.mountfield.sk/*"
       ],
       "js": ["src/scrawler.js", "src/inject.js"],
       "css": ["src/inject.css"]
