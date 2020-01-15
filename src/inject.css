@@ -5,10 +5,6 @@
 }
 .HeurekaBox a {
   color: #7e50d3 !important;
-  text-decoration: underline !important;
-}
-.HeurekaBox a:hover {
-  text-decoration: none !important;
 }
 
 .HeurekaBox__Header {
