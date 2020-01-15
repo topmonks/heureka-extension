@@ -17,7 +17,7 @@ Rozšíření vzniklo pro usnadnění vyhledávání a porovnávání cen produk
 - [x] kasa
 - [x] lekarna
 - [x] mall
-- [ ] mironet
+- [x] mironet
 - [ ] mountfield
 - [ ] notino
 - [ ] rohlik

@@ -120,6 +120,21 @@ const __eshop_scraws = {
     }
   },
 
+  mironet: {
+    get isProductPage() {
+      return Boolean(select(".product_detail"));
+    },
+    get productName() {
+      return text("h1");
+    },
+    get productPrice() {
+      return price(".product_cena_box .product_dph");
+    },
+    createRootElement: ({ className }) => {
+      return append(".product_kosik_info", { className });
+    }
+  },
+
   mock: {
     get isProductPage() {
       return Boolean(select("#product-detail"));
@@ -131,7 +146,7 @@ const __eshop_scraws = {
       return price(".price");
     },
     createRootElement: ({ className }) => {
-      append(".selector", { className });
+      return append(".selector", { className });
     }
   }
 };

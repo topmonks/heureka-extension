@@ -25,7 +25,8 @@
     "https://www.kasa.cz/*",
     "https://www.lekarna.cz/*",
     "https://www.mall.cz/*",
-    "https://www.mall.sk/*"
+    "https://www.mall.sk/*",
+    "https://www.mironet.cz/*"
   ],
   "content_scripts": [
     {
@@ -38,7 +39,8 @@
         "https://www.kasa.cz/*",
         "https://www.lekarna.cz/*",
         "https://www.mall.cz/*",
-        "https://www.mall.sk/*"
+        "https://www.mall.sk/*",
+        "https://www.mironet.cz/*"
       ],
       "js": ["src/scrawler.js", "src/inject.js"],
       "css": ["src/inject.css"]
