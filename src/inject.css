@@ -3,6 +3,13 @@
   box-shadow: 0px 10px 20px rgba(126, 80, 211, 0.48);
   margin: 32px 0;
 }
+.HeurekaBox a {
+  color: #7e50d3 !important;
+  text-decoration: underline !important;
+}
+.HeurekaBox a:hover {
+  text-decoration: none !important;
+}
 
 .HeurekaBox__Header {
   min-height: 24px;
