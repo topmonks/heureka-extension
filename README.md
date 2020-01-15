@@ -20,8 +20,10 @@ Rozšíření vzniklo pro usnadnění vyhledávání a porovnávání cen produk
 - [x] mironet
 - [x] mountfield
 - [x] tsbohemia
-- [ ] alfa
+- [x] alfa
 
+### Jak přidat vlastní oblíbený eshop?
+Example TBD
 
 ### Heureka API
 Heureka does not provide a public API so we are using Heureka's search suggestions to find products.
