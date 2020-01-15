@@ -24,7 +24,7 @@ Rozšíření vzniklo pro usnadnění vyhledávání a porovnávání cen produk
 - [ ] notino
 - [ ] rohlik
 - [ ] tsbohemia
-- [ ] alza
+- [ ] alfa
 
 
 ### Heureka API
