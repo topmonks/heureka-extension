@@ -12,7 +12,7 @@ Rozšíření vzniklo pro usnadnění vyhledávání a porovnávání cen produk
   
 ## Podporované eshopy
 - [x] alza
-- [ ] czc
+- [x] czc
 - [ ] datart
 - [ ] itesco
 - [ ] kasa

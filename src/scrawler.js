@@ -33,6 +33,35 @@ const __eshop_scraws = {
       originBuyButtonContainer.after(root);
       return root;
     }
+  },
+
+  czc: {
+    get isProductPage() {
+      return Boolean(select("#product-detail"));
+    },
+    get productName() {
+      return text("h1");
+    },
+    get productPrice() {
+      const element = select(".price .price-vatin");
+      return element ? parsePrice(text(element)) : null;
+    },
+    createRootElement: ({ className }) => {
+      const originBuyButtonContainer = select(".pd-price-delivery");
+      if (!originBuyButtonContainer) return null; // nah
+      const root = create({ className });
+      originBuyButtonContainer.after(root);
+      return root;
+    }
+  },
+
+  mock: {
+    get isProductPage() {},
+    get productName() {
+      return text("h1");
+    },
+    get productPrice() {},
+    createRootElement: ({ className }) => {}
   }
 };
 
