@@ -8,8 +8,9 @@ chrome.extension.sendMessage({}, function(response) {
 });
 
 async function liveTimeBaby() {
-  const productName = scrapeProductName();
-  const productPrice = scrapeProductPrice();
+  console.group("Porovnání cen by TopMonks");
+
+  const { productName, productPrice, createRootElement } = scrawler(location);
 
   if (!productName) {
     console.log("Product name not found.");
@@ -41,12 +42,12 @@ async function liveTimeBaby() {
     console.log("Products are not cheaper");
   }
 
-  const boxRoot = makeHeurekaRoot();
+  const boxRoot = createRootElement({ className: "HeurekaContainer" });
   if (boxRoot) {
     const box = makeHeurekaBox({
       products: foundProducts,
       productsAreNotCheaper,
-      productName,
+      productName
     });
     boxRoot.appendChild(box);
   }
@@ -54,7 +55,7 @@ async function liveTimeBaby() {
 
 function callToBackgroundScript(query, payload) {
   const meta = {
-    hostname: location.hostname,
+    hostname: location.hostname
   };
   return new Promise(resolve => {
     chrome.extension.sendMessage({ query, payload, meta }, resolve);
@@ -62,26 +63,8 @@ function callToBackgroundScript(query, payload) {
 }
 
 /**
- *  Shop page (DOM) modificators
- *  Works just on Alza.cz for now
- *
- *  Heureka = extension namespace
+ *  Products Box UI
  */
-
-const makeHeurekaRoot = () => {
-  // 1. find place nearby the buy button
-  const originBuyButtonContainer = document.querySelector(".priceDetail");
-
-  if (!originBuyButtonContainer) return null;
-
-  // 2. create box container
-  const heurekaContainer = document.createElement("div");
-  heurekaContainer.classList.add("HeurekaContainer"); // easy to read, mby use some encryption to impair detection?
-  // 3. paste box container to proper place
-  originBuyButtonContainer.after(heurekaContainer);
-
-  return heurekaContainer;
-};
 
 const extensionIcon = `
 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -92,7 +75,6 @@ const extensionIcon = `
 </svg>
 `;
 
-// Yeah, old fashion style
 const makeHeurekaBox = ({ productName, products, productsAreNotCheaper }) => {
   const box = document.createElement("div");
 
@@ -183,49 +165,3 @@ const makeHeurekaBox = ({ productName, products, productsAreNotCheaper }) => {
 
   return box;
 };
-
-const scrapeProductName = () => document.querySelector("h1").innerText;
-const scrapeProductPrice = () => {
-  let element = document.querySelector(".price_withVat");
-
-  if (!element) {
-    // Special price, different way how to display price
-    element = document.querySelector("#prices .c2");
-  }
-
-  return element ? parsePrice(element.innerText) : null;
-};
-
-/**
- * parse-price - returns a Number from a localized price string
- *
- * @version 1.1.8
- * @link https://github.com/caiogondim/parse-price.js#readme
- * @author Caio Gondim
- * @license MIT
- */
-function parsePrice(string) {
-  function t(e) {
-    return e.replace(/[^\d]/g, "");
-  }
-  function n(e) {
-    return e.replace(/[^\d.,]/g, "").replace(/[.,]$/, "");
-  }
-  function o(e) {
-    for (var r = n(e), t = "0" === r[r.length - 1], o = r.length; o > 0; o--) {
-      if (r.length - o + 1 > 3 && t) return;
-      var i = r[o - 1];
-      if (-1 !== [",", "."].indexOf(i)) return i;
-    }
-  }
-  function _parsePrice(e) {
-    var r = String(e),
-      n = "00",
-      i = o(r);
-    i && (n = r.split(i)[1]);
-    var f = r.split(i)[0];
-    return Number(t(f) + "." + t(n));
-  }
-
-  return _parsePrice(string);
-}

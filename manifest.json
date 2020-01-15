@@ -23,7 +23,7 @@
   "content_scripts": [
     {
       "matches": ["https://www.alza.cz/*", "https://www.alza.sk/*"],
-      "js": ["src/inject.js"],
+      "js": ["src/scrawler.js", "src/inject.js"],
       "css": ["src/inject.css"]
     }
   ]
