@@ -14,8 +14,7 @@ Rozšíření vzniklo pro usnadnění vyhledávání a porovnávání cen produk
 - [x] alza
 - [x] czc
 - [x] datart
-- [ ] itesco
-- [ ] kasa
+- [x] kasa
 - [ ] kosik
 - [ ] lekarna
 - [ ] mall

@@ -23,7 +23,7 @@ async function liveTimeBaby() {
   }
 
   if (!productName) {
-    console.log("Product name not found.");
+    console.log("Product name not found.", productName);
     return;
   }
 
@@ -49,7 +49,7 @@ async function liveTimeBaby() {
     Boolean(heurekaPrices.find(price => price < productPrice)) === false;
 
   if (productsAreNotCheaper) {
-    console.log("Products are not cheaper");
+    console.log("Products are not cheaper", productPrice);
   }
 
   const boxRoot = createRootElement({ className: "HeurekaContainer" });

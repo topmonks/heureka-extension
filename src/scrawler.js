@@ -1,10 +1,15 @@
 // Just DOM helpers
 const select = selector => document.querySelector(selector);
-const text = ehm => (typeof ehm === "string" ? select(ehm) : ehm).innerText;
+const text = ehm =>
+  ((typeof ehm === "string" ? select(ehm) : ehm) || {}).innerText;
 const create = ({ className, tag = "div" } = {}) => {
   const element = document.createElement(tag);
   if (className) element.classList.add(className);
   return element;
+};
+const price = (...selectors) => {
+  let element = selectors.find(selector => select(selector));
+  return element ? parsePrice(text(element)) : null;
 };
 
 // All supported eshop brands has to have record here
@@ -19,8 +24,7 @@ const __eshop_scraws = {
     },
 
     get productPrice() {
-      let element = select(".price_withVat") || select("#prices .c2");
-      return element ? parsePrice(text(element)) : null;
+      return price(".price_withVat", "#prices .c2");
     },
 
     createRootElement: ({ className }) => {
@@ -43,8 +47,7 @@ const __eshop_scraws = {
       return text("h1");
     },
     get productPrice() {
-      const element = select(".price .price-vatin");
-      return element ? parsePrice(text(element)) : null;
+      return price(".price .price-vatin");
     },
     createRootElement: ({ className }) => {
       const originBuyButtonContainer = select(".pd-price-delivery");
@@ -63,11 +66,29 @@ const __eshop_scraws = {
       return text("h1");
     },
     get productPrice() {
-      const element = select(".product-detail-price");
-      return element ? parsePrice(text(element)) : null;
+      return price(".product-detail-price");
     },
     createRootElement: ({ className }) => {
       const originBuyButtonContainer = select(".product-detail-compare-box");
+      if (!originBuyButtonContainer) return null; // nah
+      const root = create({ className });
+      originBuyButtonContainer.after(root);
+      return root;
+    }
+  },
+
+  kasa: {
+    get isProductPage() {
+      return Boolean(select(".product-detail"));
+    },
+    get productName() {
+      return text("h1");
+    },
+    get productPrice() {
+      return price("#real_price");
+    },
+    createRootElement: ({ className }) => {
+      const originBuyButtonContainer = select(".product-summary-tools");
       if (!originBuyButtonContainer) return null; // nah
       const root = create({ className });
       originBuyButtonContainer.after(root);
