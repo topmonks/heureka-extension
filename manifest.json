@@ -22,7 +22,8 @@
     "https://www.czc.cz/*",
     "https://www.datart.cz/*",
     "https://www.datart.sk/*",
-    "https://www.kasa.cz/*"
+    "https://www.kasa.cz/*",
+    "https://www.lekarna.cz/*"
   ],
   "content_scripts": [
     {
@@ -32,7 +33,8 @@
         "https://www.czc.cz/*",
         "https://www.datart.cz/*",
         "https://www.datart.sk/*",
-        "https://www.kasa.cz/*"
+        "https://www.kasa.cz/*",
+        "https://www.lekarna.cz/*"
       ],
       "js": ["src/scrawler.js", "src/inject.js"],
       "css": ["src/inject.css"]

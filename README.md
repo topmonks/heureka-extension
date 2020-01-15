@@ -15,8 +15,7 @@ Rozšíření vzniklo pro usnadnění vyhledávání a porovnávání cen produk
 - [x] czc
 - [x] datart
 - [x] kasa
-- [ ] kosik
-- [ ] lekarna
+- [x] lekarna
 - [ ] mall
 - [ ] mironet
 - [ ] mountfield

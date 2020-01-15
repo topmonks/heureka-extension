@@ -2,14 +2,27 @@
 const select = selector => document.querySelector(selector);
 const text = ehm =>
   ((typeof ehm === "string" ? select(ehm) : ehm) || {}).innerText;
+
 const create = ({ className, tag = "div" } = {}) => {
   const element = document.createElement(tag);
   if (className) element.classList.add(className);
   return element;
 };
+
 const price = (...selectors) => {
   let element = selectors.find(selector => select(selector));
   return element ? parsePrice(text(element)) : null;
+};
+
+const append = (selector, attributes) => {
+  // 1. find place nearby the buy button
+  const originBuyButtonContainer = select(selector);
+  if (!originBuyButtonContainer) return null; // nah
+  // 2. create box container
+  const root = create(attributes);
+  // 3. paste box container to proper place
+  originBuyButtonContainer.after(root);
+  return root;
 };
 
 // All supported eshop brands has to have record here
@@ -28,14 +41,7 @@ const __eshop_scraws = {
     },
 
     createRootElement: ({ className }) => {
-      // 1. find place nearby the buy button
-      const originBuyButtonContainer = select(".priceDetail");
-      if (!originBuyButtonContainer) return null; // nah
-      // 2. create box container
-      const root = create({ className });
-      // 3. paste box container to proper place
-      originBuyButtonContainer.after(root);
-      return root;
+      return append(".priceDetail", { className });
     }
   },
 
@@ -50,11 +56,7 @@ const __eshop_scraws = {
       return price(".price .price-vatin");
     },
     createRootElement: ({ className }) => {
-      const originBuyButtonContainer = select(".pd-price-delivery");
-      if (!originBuyButtonContainer) return null; // nah
-      const root = create({ className });
-      originBuyButtonContainer.after(root);
-      return root;
+      return append(".pd-price-delivery", { className });
     }
   },
 
@@ -69,11 +71,7 @@ const __eshop_scraws = {
       return price(".product-detail-price");
     },
     createRootElement: ({ className }) => {
-      const originBuyButtonContainer = select(".product-detail-compare-box");
-      if (!originBuyButtonContainer) return null; // nah
-      const root = create({ className });
-      originBuyButtonContainer.after(root);
-      return root;
+      return append(".product-detail-compare-box", { className });
     }
   },
 
@@ -88,11 +86,22 @@ const __eshop_scraws = {
       return price("#real_price");
     },
     createRootElement: ({ className }) => {
-      const originBuyButtonContainer = select(".product-summary-tools");
-      if (!originBuyButtonContainer) return null; // nah
-      const root = create({ className });
-      originBuyButtonContainer.after(root);
-      return root;
+      return append(".product-summary-tools", { className });
+    }
+  },
+
+  lekarna: {
+    get isProductPage() {
+      return Boolean(select(".detail-top"));
+    },
+    get productName() {
+      return text("h1");
+    },
+    get productPrice() {
+      return select("[itemprop=price").getAttribute("content");
+    },
+    createRootElement: ({ className }) => {
+      return append(".product__price-and-form", { className });
     }
   },
 
