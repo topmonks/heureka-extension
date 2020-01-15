@@ -10,7 +10,17 @@ chrome.extension.sendMessage({}, function(response) {
 async function liveTimeBaby() {
   console.group("Porovnání cen by TopMonks");
 
-  const { productName, productPrice, createRootElement } = scrawler(location);
+  const {
+    isProductPage,
+    productName,
+    productPrice,
+    createRootElement
+  } = scrawler(location);
+
+  if (!isProductPage) {
+    console.log("Not a product page.");
+    return;
+  }
 
   if (!productName) {
     console.log("Product name not found.");
