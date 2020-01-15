@@ -1,13 +1,30 @@
-# Porovnavac cen
-While buying product on Alza.cz or Alza.sk, this extension will check product price on Heureka.cz or Heureka.sk and prompt you to buy product on it instead. But only if it's cheaper...
+# Porovnávač cen
+Rozšíření vzniklo pro usnadnění vyhledávání a porovnávání cen produktů na českých i slovenských eshopech.
 
 ![example](https://github.com/topmonks/heureka-extension/raw/master/example.png)
 
 
-## How it works
-1. The script runs on the product details page and sends its name to the script running in the extension. It's because the extension needs to pull data from another website, and CORS policy doesn't allow it.
-2. Script extension scrapes Heureka feed and returns a result based on Heureka search
-3. The script compares Heureka price with the price shown on another e-commerce site (Alza, Datart etc.). If the price on Heureka is lower, it shows call-to-action to buy that particular stuff on Heureka  
+## Jak to funguje
+1. Po otevření produktové stránky na jednom z podporovaných eshopů rozšíření získá uvedenou cenu a název produktu
+2. Rozšíření podle získaného názvu vyhledá produkt v porovnávači cen (Heureka.cz nebo .sk)
+3. Výsledky vyhledávaní se zobrazují poblíž tlačítka koupit
+4. Pokud nebyl nalezen žadný produkt nebo žadný z nalezených nemá nižší cenu, zobrazí se pouze odkaz pro ověření
+  
+## Podporované eshopy
+- [x] alza
+- [ ] czc
+- [ ] datart
+- [ ] itesco
+- [ ] kasa
+- [ ] kosik
+- [ ] lekarna
+- [ ] mall
+- [ ] mironet
+- [ ] mountfield
+- [ ] notino
+- [ ] rohlik
+- [ ] tsbohemia
+- [ ] alza
 
 
 ### Heureka API
@@ -19,9 +36,8 @@ But there is a **limitation**: We cannot guarantee that found product can be ord
 GET https://api.heureka.cz/head-gateway/search?term=:query
 ```
 
-
 ## How to install to Chrome
-[Download it as Unlisted Chrome extension](https://chrome.google.com/webstore/detail/jmhkgcmmgjblnkjkbgjggkaeifacakgi)
+[Click to install](https://chrome.google.com/webstore/detail/jmhkgcmmgjblnkjkbgjggkaeifacakgi)
 or
 
 1. Download repository as ZIP file
@@ -29,11 +45,6 @@ or
 3. Open new Chrome tab and go to `chrome://extensions/`
 4. In the right corner turn on the Developer mode
 5. Press "Load Unpacked" button and select extracted directory
-6. Goto [alza.cz](https://alza.cz) or [alza.sk](https://alza.sk) and try it out
+6. Goto any of supported ecommerce product page 
 
 
-
-## Issues
-- [x] With parsing prices of some product with action price
-- [ ] Works only on product detail
-- [ ] Prompts even if it is not possible to buy such product on Heureka
