@@ -23,7 +23,9 @@
     "https://www.datart.cz/*",
     "https://www.datart.sk/*",
     "https://www.kasa.cz/*",
-    "https://www.lekarna.cz/*"
+    "https://www.lekarna.cz/*",
+    "https://www.mall.cz/*",
+    "https://www.mall.sk/*"
   ],
   "content_scripts": [
     {
@@ -34,7 +36,9 @@
         "https://www.datart.cz/*",
         "https://www.datart.sk/*",
         "https://www.kasa.cz/*",
-        "https://www.lekarna.cz/*"
+        "https://www.lekarna.cz/*",
+        "https://www.mall.cz/*",
+        "https://www.mall.sk/*"
       ],
       "js": ["src/scrawler.js", "src/inject.js"],
       "css": ["src/inject.css"]

@@ -105,6 +105,21 @@ const __eshop_scraws = {
     }
   },
 
+  mall: {
+    get isProductPage() {
+      return Boolean(select(".price-wrapper"));
+    },
+    get productName() {
+      return text('h1[itemprop="name"]');
+    },
+    get productPrice() {
+      return price("[itemprop=price]");
+    },
+    createRootElement: ({ className }) => {
+      return append(".product-footer", { className });
+    }
+  },
+
   mock: {
     get isProductPage() {
       return Boolean(select("#product-detail"));
@@ -112,8 +127,12 @@ const __eshop_scraws = {
     get productName() {
       return text("h1");
     },
-    get productPrice() {},
-    createRootElement: ({ className }) => {}
+    get productPrice() {
+      return price(".price");
+    },
+    createRootElement: ({ className }) => {
+      append(".selector", { className });
+    }
   }
 };
 

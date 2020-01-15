@@ -16,7 +16,7 @@ Rozšíření vzniklo pro usnadnění vyhledávání a porovnávání cen produk
 - [x] datart
 - [x] kasa
 - [x] lekarna
-- [ ] mall
+- [x] mall
 - [ ] mironet
 - [ ] mountfield
 - [ ] notino
