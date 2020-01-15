@@ -55,8 +55,30 @@ const __eshop_scraws = {
     }
   },
 
+  datart: {
+    get isProductPage() {
+      return Boolean(select("#product-detail-info"));
+    },
+    get productName() {
+      return text("h1");
+    },
+    get productPrice() {
+      const element = select(".product-detail-price");
+      return element ? parsePrice(text(element)) : null;
+    },
+    createRootElement: ({ className }) => {
+      const originBuyButtonContainer = select(".product-detail-compare-box");
+      if (!originBuyButtonContainer) return null; // nah
+      const root = create({ className });
+      originBuyButtonContainer.after(root);
+      return root;
+    }
+  },
+
   mock: {
-    get isProductPage() {},
+    get isProductPage() {
+      return Boolean(select("#product-detail"));
+    },
     get productName() {
       return text("h1");
     },
