@@ -11,7 +11,7 @@ const create = ({ className, tag = "div" } = {}) => {
 
 const price = (...selectors) => {
   let element = selectors.find(selector => select(selector));
-  return element ? parsePrice(text(element)) : null;
+  return element ? parsePrice(text(element)).toFixed(0) : null;
 };
 
 const append = (selector, attributes) => {
@@ -147,6 +147,21 @@ const __eshop_scraws = {
     },
     createRootElement: ({ className }) => {
       return append(".btnBuy", { className });
+    }
+  },
+
+  tsbohemia: {
+    get isProductPage() {
+      return Boolean(select("#stoitem_detail"));
+    },
+    get productName() {
+      return text("h1");
+    },
+    get productPrice() {
+      return price(".price");
+    },
+    createRootElement: ({ className }) => {
+      return append(".product-tools", { className });
     }
   },
 

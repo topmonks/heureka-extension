@@ -28,7 +28,8 @@
     "https://www.mall.sk/*",
     "https://www.mironet.cz/*",
     "https://www.mountfield.cz/*",
-    "https://www.mountfield.sk/*"
+    "https://www.mountfield.sk/*",
+    "https://www.tsbohemia.cz/*"
   ],
   "content_scripts": [
     {
@@ -44,7 +45,8 @@
         "https://www.mall.sk/*",
         "https://www.mironet.cz/*",
         "https://www.mountfield.cz/*",
-        "https://www.mountfield.sk/*"
+        "https://www.mountfield.sk/*",
+        "https://www.tsbohemia.cz/*"
       ],
       "js": ["src/scrawler.js", "src/inject.js"],
       "css": ["src/inject.css"]

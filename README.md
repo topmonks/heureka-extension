@@ -19,9 +19,7 @@ Rozšíření vzniklo pro usnadnění vyhledávání a porovnávání cen produk
 - [x] mall
 - [x] mironet
 - [x] mountfield
-- [ ] notino
-- [ ] rohlik
-- [ ] tsbohemia
+- [x] tsbohemia
 - [ ] alfa
 
 
