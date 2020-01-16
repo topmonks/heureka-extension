@@ -87,6 +87,7 @@ const extensionIcon = `
 
 const makeHeurekaBox = ({ productName, products, productsAreNotCheaper }) => {
   const box = document.createElement("div");
+  const tld = location.hostname.split(".").reverse()[0];
 
   box.classList.add("HeurekaBox");
 
@@ -96,11 +97,12 @@ const makeHeurekaBox = ({ productName, products, productsAreNotCheaper }) => {
   if (!products.length) {
     title.classList.add("HeurekaBox__Header--no-result");
     title.innerHTML = `Ve srovnávači jsme nenašli podobný produkt`;
+    title.innerHTML += extensionIcon;
 
     const text = document.createElement("p");
     text.classList.add("HeurekaBox__NotFound");
 
-    text.innerHTML = `Srovnejte jiný produkt, <a href="https://www.heureka.cz/?h[fraze]=${productName}">nebo ho vyhledejte manuálně</a>.`;
+    text.innerHTML = `Srovnejte jiný produkt, <a href="https://www.heureka.${tld}/?h[fraze]=${productName}">nebo ho vyhledejte manuálně</a>.`;
 
     box.appendChild(title);
     box.appendChild(text);
@@ -111,11 +113,12 @@ const makeHeurekaBox = ({ productName, products, productsAreNotCheaper }) => {
   if (productsAreNotCheaper) {
     title.classList.add("HeurekaBox__Title--no-result");
     title.innerHTML = `Cena tohoto produktu je ve srovnávači vyšší`;
+    title.innerHTML += extensionIcon;
 
     const text = document.createElement("p");
     text.classList.add("HeurekaBox__NotFound");
 
-    text.innerHTML = `Přesvědčte se sami <a href="https://www.heureka.cz/?h[fraze]=${productName}">přímo ve srovnávači</a>.`;
+    text.innerHTML = `Přesvědčte se sami <a href="https://www.heureka.${tld}/?h[fraze]=${productName}">přímo ve srovnávači</a>.`;
 
     box.appendChild(title);
     box.appendChild(text);
