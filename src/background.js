@@ -3,14 +3,23 @@
 // var settings = new Store("settings", {
 //     "sample_setting": "This is how you use Store.js to remember values"
 // });
-console.log("alive");
 
-chrome.extension.onMessage.addListener((request, sender, sendResponse) => {
-  const { query, payload, meta } = request;
-  callToHeureka(query, payload, meta).then(sendResponse);
+console.log("alive :))");
 
-  return true;
-});
+const isChrome = window.browser === void 0;
+const listenToMessages = handler => {
+  return (isChrome ? chrome.extension : browser.runtime).onMessage.addListener(
+    (request, sender, sendResponse) => {
+      handler(request).then(sendResponse);
+      return true;
+    }
+  );
+};
+
+// Enter here :)
+listenToMessages(({ query, payload, meta }) =>
+  callToHeureka(query, payload, meta)
+);
 
 async function callToHeureka(
   query,
@@ -37,7 +46,7 @@ async function searchProductsOnHeureka(term, { apiUrl } = {}) {
 
   try {
     const {
-      products: { result: foundProducts },
+      products: { result: foundProducts }
     } = await result.json();
     console.log("Products found on Heureka", foundProducts);
 

@@ -1,0 +1,14 @@
+{
+  "name": "heureka-extension-test",
+  "version": "0.0.1",
+  "description": "Automated end-to-end Chromium tests powered by Puppeteer and Jest.",
+  "main": "index.js",
+  "scripts": {
+    "test": "index.js"
+  },
+  "author": "Dan z TopMonks",
+  "license": "MIT",
+  "dependencies": {
+    "puppeteer": "^2.0.0"
+  }
+}

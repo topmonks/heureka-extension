@@ -1,4 +1,20 @@
-chrome.extension.sendMessage({}, function(response) {
+const isChrome = Boolean(window.chrome);
+const sendMessageToBackground = (query = null, payload = null) => {
+  const meta = {
+    hostname: location.hostname
+  };
+
+  if (isChrome) {
+    return new Promise(resolve => {
+      chrome.extension.sendMessage({ query, meta, payload }, resolve);
+    });
+  }
+
+  return browser.runtime.sendMessage({ query, meta, payload });
+};
+
+// Enter here :)
+sendMessageToBackground().then(() => {
   var readyStateCheckInterval = setInterval(function() {
     if (document.readyState === "complete") {
       clearInterval(readyStateCheckInterval);
@@ -28,7 +44,7 @@ async function liveTimeBaby() {
   }
 
   // get products
-  const foundProducts = await callToBackgroundScript(
+  const foundProducts = await sendMessageToBackground(
     "Najdi mi prosimtě tohle zbožíčko",
     productName
   );
@@ -61,15 +77,6 @@ async function liveTimeBaby() {
     });
     boxRoot.appendChild(box);
   }
-}
-
-function callToBackgroundScript(query, payload) {
-  const meta = {
-    hostname: location.hostname
-  };
-  return new Promise(resolve => {
-    chrome.extension.sendMessage({ query, payload, meta }, resolve);
-  });
 }
 
 /**
