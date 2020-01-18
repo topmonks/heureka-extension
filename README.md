@@ -10,19 +10,24 @@ Rozšíření vzniklo pro usnadnění vyhledávání a porovnávání cen produk
 3. Výsledky vyhledávaní se zobrazují poblíž tlačítka koupit
 4. Pokud nebyl nalezen žadný produkt nebo žadný z nalezených nemá nižší cenu, zobrazí se pouze odkaz pro ověření
   
-## Podporované eshopy
-- [x] alza
-- [x] czc
-- [x] datart
-- [x] kasa
-- [x] lekarna
-- [x] mall
-- [x] mironet
-- [x] mountfield
-- [x] tsbohemia
-- [x] alfa
+### Podporované prohlížeče
 
-### Jak přidat vlastní oblíbený eshop?
+- [x] Google Chrome - [click to install](https://chrome.google.com/webstore/detail/jmhkgcmmgjblnkjkbgjggkaeifacakgi)
+- [x] Mozila Firefox - [click to install](https://addons.mozilla.org/cs/firefox/addon/porovnani-cen-by-topmonks/)
+
+### Podporované eshopy
+- [x] [alza.cz](https://alza.cz), [alza.sk](https://alza.sk)
+- [x] [czc.cz](https://czc.cz)
+- [x] [datart.cz](https://datart.cz), [datart.sk](https://datart.sk)
+- [x] [kasa.cz](https://kasa.cz)
+- [x] [lekarna.cz](https://lekarna.cz)
+- [x] [mall.cz](https://mall.cz), [mall.sk](https://mall.sk)
+- [x] [mironet.cz](https://mironet.cz)
+- [x] [mountfield.cz](https://mountfield.cz), [mountfield.sk](https://mountfield.sk)
+- [x] [tsbohemia.cz](https://tsbohemia.cz)
+- [x] [alfa.cz](https://alfa.cz)
+
+#### Jak přidat vlastní oblíbený eshop?
 Example TBD
 
 ### Heureka API
@@ -33,16 +38,3 @@ But there is a **limitation**: We cannot guarantee that found product can be ord
 ```
 GET https://api.heureka.cz/head-gateway/search?term=:query
 ```
-
-## How to install to Chrome
-[Click to install](https://chrome.google.com/webstore/detail/jmhkgcmmgjblnkjkbgjggkaeifacakgi)
-or
-
-1. Download repository as ZIP file
-2. Extract ZIP
-3. Open new Chrome tab and go to `chrome://extensions/`
-4. In the right corner turn on the Developer mode
-5. Press "Load Unpacked" button and select extracted directory
-6. Goto any of supported ecommerce product page 
-
-
