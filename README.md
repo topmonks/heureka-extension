@@ -28,7 +28,10 @@ Rozšíření vzniklo pro usnadnění vyhledávání a porovnávání cen produk
 - [x] [alfa.cz](https://alfa.cz)
 
 #### Jak přidat vlastní oblíbený eshop?
-Example TBD
+1. přidat adresu eshopu do `permissions` a `content_scripts` v `manifest.js`
+2. přidat záznám do `__eshop_scraws` v `src/scrawler.js`
+
+**Ukázka commitu:** [#6228e67](https://github.com/topmonks/heureka-extension/commit/6d1f5297cbda1df12a9454c8df5ad87b8373dc26) - _support alfa.cz_
 
 ### Heureka API
 Heureka does not provide a public API so we are using Heureka's search suggestions to find products.
