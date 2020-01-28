@@ -14,6 +14,7 @@ Rozšíření vzniklo pro usnadnění vyhledávání a porovnávání cen produk
 
 - [x] Google Chrome - [click to install](https://chrome.google.com/webstore/detail/jmhkgcmmgjblnkjkbgjggkaeifacakgi)
 - [x] Mozila Firefox - [click to install](https://addons.mozilla.org/cs/firefox/addon/porovnani-cen-by-topmonks/)
+- [x] Opera - [Install Chrome Extensions](https://addons.opera.com/sk/extensions/details/install-chrome-extensions/) &#8594; [click to install](https://chrome.google.com/webstore/detail/jmhkgcmmgjblnkjkbgjggkaeifacakgi)
 
 ### Podporované eshopy
 - [x] [alza.cz](https://alza.cz), [alza.sk](https://alza.sk)
