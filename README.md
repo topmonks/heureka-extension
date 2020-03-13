@@ -9,7 +9,7 @@ Rozšíření vzniklo pro usnadnění vyhledávání a porovnávání cen produk
 2. Rozšíření podle získaného názvu vyhledá produkt v porovnávači cen (Heureka.cz nebo .sk)
 3. Výsledky vyhledávaní se zobrazují poblíž tlačítka koupit
 4. Pokud nebyl nalezen žadný produkt nebo žadný z nalezených nemá nižší cenu, zobrazí se pouze odkaz pro ověření
-  
+
 ### Podporované prohlížeče
 
 - [x] Google Chrome - [click to install](https://chrome.google.com/webstore/detail/jmhkgcmmgjblnkjkbgjggkaeifacakgi)
@@ -27,6 +27,7 @@ Rozšíření vzniklo pro usnadnění vyhledávání a porovnávání cen produk
 - [x] [mountfield.cz](https://mountfield.cz), [mountfield.sk](https://mountfield.sk)
 - [x] [tsbohemia.cz](https://tsbohemia.cz)
 - [x] [alfa.cz](https://alfa.cz)
+- [x] [ab-com.cz](https://www.ab-com.cz)
 
 #### Jak přidat vlastní oblíbený eshop?
 1. přidat adresu eshopu do `permissions` a `content_scripts` v `manifest.js`

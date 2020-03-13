@@ -30,7 +30,8 @@
     "https://www.mountfield.cz/*",
     "https://www.mountfield.sk/*",
     "https://www.tsbohemia.cz/*",
-    "https://www.alfa.cz/*"
+    "https://www.alfa.cz/*",
+    "https://www.ab-com.cz/*"
   ],
   "content_scripts": [
     {
@@ -48,7 +49,8 @@
         "https://www.mountfield.cz/*",
         "https://www.mountfield.sk/*",
         "https://www.tsbohemia.cz/*",
-        "https://www.alfa.cz/*"
+        "https://www.alfa.cz/*",
+        "https://www.ab-com.cz/*"
       ],
       "js": ["src/scrawler.js", "src/inject.js"],
       "css": ["src/inject.css"]
