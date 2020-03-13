@@ -184,6 +184,21 @@ const __eshop_scraws = {
     }
   },
 
+  "ab-com": {
+    get isProductPage() {
+      return Boolean(select("meta[itemprop=sku]"));
+    },
+    get productName() {
+      return text("h1");
+    },
+    get productPrice() {
+      return price(".box-detail-add__prices__item--main");
+    },
+    createRootElement: ({ className = "" }) => {
+      return append(".js-product-detail-main-add-to-cart-wrapper", { className });
+    }
+  },
+
   mock: {
     get isProductPage() {
       return Boolean(select("#product-detail"));
