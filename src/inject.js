@@ -26,17 +26,18 @@ sendMessageToBackground().then(() => {
 async function liveTimeBaby() {
   console.group("Porovnání cen by TopMonks");
 
-  const {
-    isProductPage,
-    productName,
-    productPrice,
-    createRootElement
-  } = scrawler(location);
+  const parsed = scrawler(location);
 
-  if (!isProductPage) {
+  if (!parsed.isProductPage) {
     console.log("Not a product page.");
     return;
   }
+
+  const {
+    productName,
+    productPrice,
+    createRootElement
+  } = parsed;
 
   if (!productName) {
     console.log("Product name not found.", productName);
