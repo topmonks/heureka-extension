@@ -199,6 +199,21 @@ const __eshop_scraws = {
     }
   },
 
+  electroworld: {
+    get isProductPage() {
+      return Boolean(select(".product-top__title"));
+    },
+    get productName() {
+      return text(".product-top__title");
+    },
+    get productPrice() {
+      return price(".product-top__price strong");
+    },
+    createRootElement: ({ className = "" }) => {
+      return append(".product-top__cta", { className });
+    }
+  },
+
   mock: {
     get isProductPage() {
       return Boolean(select("#product-detail"));
