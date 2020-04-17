@@ -63,6 +63,12 @@ module.exports = [
 		"exampleProductPath": "sekera-patriot-l-73-cm/1900-g-1zst4100"
 	},
 	{
+		"domain": "softcom",
+		"tld": "cz",
+		"origin": "https://www.softcom.cz/",
+		"exampleProductPath": "eshop/apple-iphone-11-64-gb-cerny_d232885.html"
+	},
+	{
 		"domain": "tsbohemia",
 		"tld": "cz",
 		"origin": "https://www.tsbohemia.cz/",

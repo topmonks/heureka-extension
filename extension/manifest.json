@@ -32,7 +32,8 @@
     "https://www.tsbohemia.cz/*",
     "https://www.alfa.cz/*",
     "https://www.ab-com.cz/*",
-    "https://www.electroworld.cz/*"
+    "https://www.electroworld.cz/*",
+    "https://www.softcom.cz/*"
   ],
   "content_scripts": [
     {
@@ -52,7 +53,8 @@
         "https://www.tsbohemia.cz/*",
         "https://www.alfa.cz/*",
         "https://www.ab-com.cz/*",
-        "https://www.electroworld.cz/*"
+        "https://www.electroworld.cz/*",
+        "https://www.softcom.cz/*"
       ],
       "js": ["src/scrawler.js", "src/inject.js"],
       "css": ["src/inject.css"]
