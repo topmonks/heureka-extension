@@ -214,6 +214,21 @@ const __eshop_scraws = {
     }
   },
 
+  softcom: {
+    get isProductPage() {
+      return Boolean(select("#stoitem_detail"));
+    },
+    get productName() {
+      return text("#stoitem_detail h1");
+    },
+    get productPrice() {
+      return price("#stoitem_detail .price");
+    },
+    createRootElement: ({ className = "" }) => {
+      return append("#stoitem_detail .inetstock", { className, style: "clear: both;" });
+    }
+  },
+
   mock: {
     get isProductPage() {
       return Boolean(select("#product-detail"));

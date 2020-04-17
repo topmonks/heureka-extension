@@ -29,6 +29,7 @@ Rozšíření vzniklo pro usnadnění vyhledávání a porovnávání cen produk
 - [x] [alfa.cz](https://alfa.cz)
 - [x] [ab-com.cz](https://www.ab-com.cz)
 - [x] [electroworld.cz](https://electroworld.cz)
+- [x] [softcom.cz](https://www.softcom.cz)
 
 #### Jak přidat vlastní oblíbený eshop?
 1. přidat adresu eshopu do `permissions` a `content_scripts` v `manifest.js`
