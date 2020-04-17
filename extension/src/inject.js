@@ -15,7 +15,7 @@ const sendMessageToBackground = (query = null, payload = null) => {
 
 // Enter here :)
 sendMessageToBackground().then(() => {
-  var readyStateCheckInterval = setInterval(function() {
+  var readyStateCheckInterval = setInterval(() => {
     if (document.readyState === "complete") {
       clearInterval(readyStateCheckInterval);
       liveTimeBaby();
@@ -59,8 +59,9 @@ async function liveTimeBaby() {
       ? foundProducts.map(product => parsePrice(product.price))
       : [];
 
-  if (productPrice)
+  if (productPrice) {
     console.log({ productName, productPrice, heurekaPrices, foundProducts });
+  }
 
   const productsAreNotCheaper =
     Boolean(heurekaPrices.find(price => price < productPrice)) === false;
@@ -104,7 +105,7 @@ const makeHeurekaBox = ({ productName, products, productsAreNotCheaper }) => {
 
   if (!products.length) {
     title.classList.add("HeurekaBox__Header--no-result");
-    title.innerHTML = `Ve srovnávači jsme nenašli podobný produkt`;
+    title.innerHTML = "Ve srovnávači jsme nenašli podobný produkt";
     title.innerHTML += extensionIcon;
 
     const text = document.createElement("p");
@@ -120,7 +121,7 @@ const makeHeurekaBox = ({ productName, products, productsAreNotCheaper }) => {
 
   if (productsAreNotCheaper) {
     title.classList.add("HeurekaBox__Title--no-result");
-    title.innerHTML = `Cena tohoto produktu je ve srovnávači vyšší`;
+    title.innerHTML = "Cena tohoto produktu je ve srovnávači vyšší";
     title.innerHTML += extensionIcon;
 
     const text = document.createElement("p");
@@ -146,6 +147,7 @@ const makeHeurekaBox = ({ productName, products, productsAreNotCheaper }) => {
     productImage.src = product.image_url;
     productImage.classList.add("HeurekaBox__ProductImage");
 
+    // eslint-disable-next-line no-shadow
     const productName = document.createElement("h2");
     productName.innerText = product.name;
     productName.classList.add("HeurekaBox__ProductName");

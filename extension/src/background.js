@@ -6,13 +6,13 @@
 
 console.log("alive :))");
 
-const isChrome = window.browser === void 0;
+const isChrome = window.browser === void 0; // eslint-disable-line no-void
 const listenToMessages = handler => {
   return (isChrome ? chrome.extension : browser.runtime).onMessage.addListener(
     (request, sender, sendResponse) => {
       handler(request).then(sendResponse);
       return true;
-    }
+    },
   );
 };
 
@@ -53,6 +53,6 @@ async function searchProductsOnHeureka(term, { apiUrl } = {}) {
     // return all found products
     return foundProducts;
   } catch (error) {
-    console.error(`It seems like  Heureka's API has change`);
+    console.error("It seems like  Heureka's API has change");
   }
 }
