@@ -1,3 +1,4 @@
+/* eslint-disable */
 const puppeteer = require("puppeteer");
 
 const EXT_REL_PATH = ".."; // heureka-extension

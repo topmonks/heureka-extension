@@ -1,0 +1,5 @@
+{
+  "chromeWebSecurity": false,
+  "trashAssetsBeforeRuns": true,
+  "watchForFileChanges": false
+}

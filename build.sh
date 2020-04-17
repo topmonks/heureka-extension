@@ -1,4 +1,4 @@
 #!/bin/bash
 
 rm -f build.zip || true
-git archive --format=zip HEAD -o build.zip
+git archive --format=zip -o build.zip HEAD:extension

@@ -1,0 +1,24 @@
+{
+  "name": "heureka-extension",
+  "description": "Rozšíření vzniklo pro usnadnění vyhledávání a porovnávání cen produktů na českých i slovenských eshopech. Celý příběh vzniku Porovnávače cen se dočtete [zde](https://blog.topmonks.com/ako-sme-chceli-dosta%C5%A5-heur%C3%A9ku-do-alzy-c51378799d89).",
+  "homepage": "https://github.com/topmonks/heureka-extension",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/topmonks/heureka-extension.git"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "cypress:open": "cypress open",
+    "download-configuration-from-google-sheets": "node cypress/download-configuration-from-google-sheets.js"
+  },
+  "devDependencies": {
+    "cypress": "^3.8.3",
+    "cypress-browser-extension-plugin": "^0.1.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-cypress": "^2.10.3",
+    "eslint-plugin-import": "^2.20.2",
+    "tabletop": "^1.6.2"
+  }
+}
