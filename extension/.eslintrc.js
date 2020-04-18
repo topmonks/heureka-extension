@@ -8,7 +8,8 @@ module.exports = {
     "browser": "readonly",
 
     // This extension specific
-    "scrawler": "writable",
+    "scrawlers": "writable",
+    "insert": "writeable",
     "parsePrice": "writeable",
   },
   "rules": {

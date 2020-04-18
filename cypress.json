@@ -1,5 +1,6 @@
 {
   "chromeWebSecurity": false,
   "trashAssetsBeforeRuns": true,
-  "watchForFileChanges": false
+  "watchForFileChanges": false,
+  "numTestsKeptInMemory": 200
 }

@@ -15,48 +15,59 @@
     "persistent": true
   },
   "permissions": [
-    "https://www.alza.cz/*",
     "https://api.heureka.cz/*",
-    "https://www.alza.sk/*",
     "https://api.heureka.sk/*",
+
+    "https://www.ab-com.cz/*",
+    "https://www.alfa.cz/*",
+    "https://www.alza.cz/*",
+    "https://www.alza.sk/*",
+    "https://www.booktook.cz/*",
+    "https://www.bscom.cz/*",
     "https://www.czc.cz/*",
     "https://www.datart.cz/*",
     "https://www.datart.sk/*",
+    "https://www.drmax.cz/*",
+    "https://www.electroworld.cz/*",
     "https://www.kasa.cz/*",
+    "https://www.knihcentrum.cz/*",
     "https://www.lekarna.cz/*",
     "https://www.mall.cz/*",
     "https://www.mall.sk/*",
+    "https://www.megaknihy.cz/*",
     "https://www.mironet.cz/*",
     "https://www.mountfield.cz/*",
     "https://www.mountfield.sk/*",
-    "https://www.tsbohemia.cz/*",
-    "https://www.alfa.cz/*",
-    "https://www.ab-com.cz/*",
-    "https://www.electroworld.cz/*",
-    "https://www.softcom.cz/*"
+    "https://www.softcom.cz/*",
+    "https://www.tsbohemia.cz/*"
   ],
   "content_scripts": [
     {
       "matches": [
+        "https://www.ab-com.cz/*",
+        "https://www.alfa.cz/*",
         "https://www.alza.cz/*",
         "https://www.alza.sk/*",
+        "https://www.booktook.cz/*",
+        "https://www.bscom.cz/*",
         "https://www.czc.cz/*",
         "https://www.datart.cz/*",
         "https://www.datart.sk/*",
+        "https://www.drmax.cz/*",
+        "https://www.electroworld.cz/*",
         "https://www.kasa.cz/*",
+        "https://www.knihcentrum.cz/*",
         "https://www.lekarna.cz/*",
         "https://www.mall.cz/*",
         "https://www.mall.sk/*",
+        "https://www.megaknihy.cz/*",
         "https://www.mironet.cz/*",
         "https://www.mountfield.cz/*",
         "https://www.mountfield.sk/*",
-        "https://www.tsbohemia.cz/*",
-        "https://www.alfa.cz/*",
-        "https://www.ab-com.cz/*",
-        "https://www.electroworld.cz/*",
-        "https://www.softcom.cz/*"
+        "https://www.softcom.cz/*",
+        "https://www.tsbohemia.cz/*"
       ],
-      "js": ["src/scrawler.js", "src/inject.js"],
+      "js": ["src/helpers.js", "src/scrawlers.js", "src/inject.js"],
       "css": ["src/inject.css"]
     }
   ]
