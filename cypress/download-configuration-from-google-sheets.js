@@ -7,9 +7,9 @@ const Tabletop = require("tabletop");
   const results = await Tabletop.init({
     key: "https://docs.google.com/spreadsheets/d/1FBfQlYsWDWpeFG29WNvQX8kPe5_jU15joAFQseFPlvk/",
     orderby: "domain",
-    wanted: ["Main"]
+    wanted: ["v2"]
   })
-    .then(res => res.Main.elements)
+    .then(res => res.v2.elements)
     .then(rows => rows.filter(row => !row.IGNORE))
     .then(rows => rows.map(row => {
       delete row.IGNORE; // eslint-disable-line no-param-reassign
@@ -28,4 +28,33 @@ const Tabletop = require("tabletop");
       JSON.stringify(results, null, "\t")
     ].join("")
   );
+
+  // TODO: Refactor following quick'n'dirty style
+
+  console.log("Patterns for manifest:");
+  const patterns = [];
+  for (const row of results) {
+    patterns.push(
+      ...row.tld.split(",")
+        .map(x => `"${row.origin.replace("<TLD>", x)}*"`)
+    );
+  }
+  console.log(patterns.join(",\n"));
+
+  console.log("\n\n");
+
+  console.log("Items for Readme:");
+  const items = [];
+  for (const row of results) {
+    const url = row.origin.replace(/\/$/, "");
+    items.push(
+      row.tld.split(",")
+        .map(x => {
+          const urlWithTld = url.replace("<TLD>", x);
+          return `[${urlWithTld.replace(/https:\/\/(www.)?/, "")}](${urlWithTld})`;
+        })
+        .join(", ")
+    );
+  }
+  console.log(items.map(x => "- [x] " + x).join("\n"));
 })();

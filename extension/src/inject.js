@@ -26,32 +26,46 @@ sendMessageToBackground().then(() => {
 async function liveTimeBaby() {
   console.group("Porovnání cen by TopMonks");
 
-  const parsed = scrawler(location);
+  const scrawler = scrawlers[location.hostname.split(".").reverse()[1]];
 
-  if (!parsed.isProductPage) {
+  if (!scrawler) {
+    console.warn("Website not supported (this shouldn't happen when permissions in manifest.json are correctly configured", { location });
+    return; // Do not continue
+  }
+
+  const isProductPage = typeof scrawler.test === "function"
+    ? scrawler.test()
+    : Boolean(document.querySelector(scrawler.test));
+
+  if (!isProductPage) {
     console.log("Not a product page.");
-    return;
+    return; // Do not continue
   }
 
-  const {
-    productName,
-    productPrice,
-    createRootElement
-  } = parsed;
-
-  if (!productName) {
-    console.log("Product name not found.", productName);
-    return;
+  let name;
+  try {
+    name = typeof scrawler.name === "function"
+      ? scrawler.name()
+      : document.querySelector(scrawler.name).innerText;
+  } catch (e) {
+    console.warn("Getting `name` failed:", e);
+    return; // Do not continue
   }
 
-  // get products
-  const foundProducts = await sendMessageToBackground(
-    "Najdi mi prosimtě tohle zbožíčko",
-    productName
-  );
+  let price;
+  try {
+    price = typeof scrawler.price === "function"
+      ? scrawler.price()
+      : parsePrice(document.querySelector(scrawler.price).innerText).toFixed(0);
+  } catch (e) {
+    console.warn("Getting `price` failed:", e);
+    // Continue even without price
+  }
+
+  const foundProducts = await sendMessageToBackground("Najdi mi prosimtě tohle zbožíčko", name);
 
   if (!foundProducts.length) {
-    console.log("No products found.", productName);
+    console.log("No products found.", { name });
   }
 
   const heurekaPrices =
@@ -59,26 +73,37 @@ async function liveTimeBaby() {
       ? foundProducts.map(product => parsePrice(product.price))
       : [];
 
-  if (productPrice) {
-    console.log({ productName, productPrice, heurekaPrices, foundProducts });
-  }
+  console.log("Summary", { productName: name, productPrice: price, heurekaPrices, foundProducts });
 
   const productsAreNotCheaper =
-    Boolean(heurekaPrices.find(price => price < productPrice)) === false;
+    Boolean(heurekaPrices.find(x => x < price)) === false;
 
   if (productsAreNotCheaper) {
-    console.log("Products are not cheaper", productPrice);
+    console.log("Products are not cheaper", { price });
   }
 
-  const boxRoot = createRootElement({ className: "HeurekaContainer" });
-  if (boxRoot) {
-    const box = makeHeurekaBox({
-      products: foundProducts,
-      productsAreNotCheaper,
-      productName
-    });
-    boxRoot.appendChild(box);
+  let boxRoot;
+  try {
+    boxRoot = typeof scrawler.render === "function"
+      ? scrawler.render() // TODO: Consider providing some useful info for that function
+      : insert(
+        scrawler.render.target,
+        scrawler.render.position,
+        {
+          className: scrawler.render.className || "HeurekaContainer",
+          style: scrawler.render.style
+        }
+      );
+  } catch (e) {
+    console.warn("Inserting widget into DOM failed:", e);
+    return; // Do not continue
   }
+
+  boxRoot.appendChild(makeHeurekaBox({
+    products: foundProducts,
+    productsAreNotCheaper,
+    productName: name
+  }));
 }
 
 /**

@@ -53,6 +53,6 @@ async function searchProductsOnHeureka(term, { apiUrl } = {}) {
     // return all found products
     return foundProducts;
   } catch (error) {
-    console.error("It seems like  Heureka's API has change");
+    console.error("It seems like Heureka's API has change");
   }
 }
