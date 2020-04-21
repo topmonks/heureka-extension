@@ -1,8 +1,17 @@
 .HeurekaBox {
+  max-width: 800px;
   background: #fff;
   box-shadow: 0px 10px 20px rgba(126, 80, 211, 0.48);
   margin: 32px 0;
 }
+
+.HeurekaBox * {
+  /* Reset inherited */
+  /* TODO: Do properly, so Heureka box doesn't inherit any styles */
+  /* https://stackoverflow.com/questions/15901030/reset-remove-css-styles-for-element-only */
+  text-transform: initial;
+}
+
 .HeurekaBox a {
   color: #7e50d3 !important;
   text-decoration: none !important;

@@ -9,8 +9,10 @@
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
+    "test": "jest",
     "cypress:open": "cypress open",
-    "download-configuration-from-google-sheets": "node cypress/download-configuration-from-google-sheets.js"
+
+    "generate-info": "node generate-info.js"
   },
   "devDependencies": {
     "cypress": "^3.8.3",
@@ -19,6 +21,6 @@
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-plugin-cypress": "^2.10.3",
     "eslint-plugin-import": "^2.20.2",
-    "tabletop": "^1.6.2"
+    "jest": "^25.4.0"
   }
 }
