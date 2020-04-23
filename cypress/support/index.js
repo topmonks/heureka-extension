@@ -1,3 +1,2 @@
-const addExtensionCommands = require("cypress-browser-extension-plugin/commands");
-
-addExtensionCommands(Cypress);
+require("cypress-skip-and-only-ui/support");
+require("cypress-browser-extension-plugin/commands")(Cypress);
