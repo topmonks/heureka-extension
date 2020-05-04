@@ -12,7 +12,7 @@ require("child_process").fork("./cypress/other-extensions/unpack.js");
 module.exports = (on, config) => { // eslint-disable-line no-unused-vars
   on("task", task);
   on("before:browser:launch", extensionLoader.load(
-    { source: "./extension", alias: "heureka-extension" },
+    { source: "./build", alias: "heureka-extension" },
     { source: "./cypress/other-extensions/unpacked/i-dont-care-about-cookies", alias: "cookies" },
     { source: "./cypress/other-extensions/unpacked/ublock-origin", alias: "ublock", skipHooks: true },
   ));

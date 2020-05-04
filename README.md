@@ -17,6 +17,9 @@ Rozšíření vzniklo pro usnadnění vyhledávání a porovnávání cen produk
 - [x] Opera - [Install Chrome Extensions](https://addons.opera.com/sk/extensions/details/install-chrome-extensions/) &#8594; [click to install](https://chrome.google.com/webstore/detail/jmhkgcmmgjblnkjkbgjggkaeifacakgi)
 
 ### Podporované eshopy
+
+[//]: # (Run `npm run generate-readme` to update this)
+
 - [x] [ab-com.cz](https://www.ab-com.cz)
 - [x] [alfa.cz](https://www.alfa.cz)
 - [x] [alza.cz](https://www.alza.cz), [alza.sk](https://www.alza.sk)
@@ -63,29 +66,3 @@ But there is a **limitation**: We cannot guarantee that found product can be ord
 ```
 GET https://api.heureka.cz/head-gateway/search?term=:query
 ```
-
-#### Development tip: Live reloading
-
-Add this snippet at the end of `background.js`
-
-```
-chrome.tabs.onUpdated.addListener((tabId, info, tab) => {
-  if (info.url === "http://localhost/reloadExtension?id=heureka-extension") {
-    chrome.tabs.remove(tabId);
-    chrome.runtime.reload();
-  }
-});
-```
-
-Add following entries to `permissions` block in `manifest.json`
-
-```
-"tabs",
-"http://localhost/reloadExtension?id=*"
-```
-
-Install [fswatch](https://github.com/emcrisostomo/fswatch) (On MacOS: `brew install fswatch`) 
-
-Run `fswatch -o extension/* | xargs -n1 -I{} open http://localhost/reloadExtension?id=heureka-extension`
-
-Don't forget NOT to commit it

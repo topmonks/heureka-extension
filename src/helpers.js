@@ -63,3 +63,9 @@ function parsePrice(string) {
   return _parsePrice(string);
 }
 /* eslint-enable */
+
+module.exports = {
+  create,
+  insert,
+  parsePrice
+};

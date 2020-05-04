@@ -1,3 +1,6 @@
+const scrawlers = require("./scrawlers");
+const { insert, parsePrice } = require("./helpers");
+
 const isChrome = Boolean(window.chrome);
 const sendMessageToBackground = (query = null, payload = null) => {
   const meta = {
