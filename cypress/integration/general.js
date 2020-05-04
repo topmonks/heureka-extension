@@ -1,4 +1,4 @@
-const scrawlers = require("../../extension/src/scrawlers");
+const scrawlers = require("../../src/scrawlers");
 const simpleBraceExpansion = require("../../utils/simpleBraceExpansion");
 
 Cypress.config("defaultCommandTimeout", 10 * 1000); // 10s should be enough time to load a page
