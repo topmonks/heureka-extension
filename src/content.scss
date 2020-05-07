@@ -1,0 +1,119 @@
+$font-size: 16px;
+$line-height: $font-size + 2;
+
+$spacing: 16px;
+
+$border-radius: 14px;
+
+$color-white: #fff;
+$color-border: #E8E8E8;
+$color-brand: #7e50d3;
+$color-body-subtle: #404040;
+$color-body-subtler: #595959;
+$color-body-main: #000;
+
+#HeurekaContainer {
+  .HeurekaBox {
+    margin: $spacing 0;
+    max-width: 1000px;
+    border: 1px solid $color-border;
+    border-radius: $border-radius;
+    background: $color-white;
+
+    * {
+      // Reset
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      text-transform: initial;
+      font-family: Arial, sans-serif;
+    }
+
+    a {
+      color: $color-brand;
+      text-decoration: none;
+    }
+
+    &__Header {
+      padding: $spacing;
+      min-height: 24px;
+      line-height: 24px;
+      border-top-left-radius: $border-radius;
+      border-top-right-radius: $border-radius;
+      background: $color-brand;
+      color: $color-white;
+      font-size: $font-size;
+      font-weight: bold;
+
+      svg {
+        float: right;
+      }
+    }
+
+    &__NotFound {
+      padding: $spacing;
+      color: $color-body-subtle;
+      font-size: $font-size;
+      font-weight: bold;
+      line-height: $line-height;
+    }
+
+    &__ProductsList {
+
+      &__Item {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        padding: $spacing;
+        border-bottom: 1px solid $color-border;
+        background-color: $color-white;
+        text-decoration: none;
+
+        &:hover {
+          background-color: #f4f4f4;
+        }
+      }
+    }
+
+    &__ProductImage {
+      margin-right: $spacing/2;
+      width: 48px;
+      height: 48px;
+    }
+
+    &__ProductInfoColumn {
+      flex: 1;
+    }
+
+    &__ProductName {
+      margin: 0 0 $spacing/2 0;
+      color: $color-body-main;
+      font-size: $font-size;
+      font-weight: bold;
+      line-height: $line-height;
+    }
+
+    &__ProductCategory {
+      margin: 0;
+      color: $color-body-subtler;
+      font-size: 14px;
+      line-height: 16px;
+    }
+
+    &__ProductPrice {
+      color: $color-body-subtler;
+      text-align: right;
+      font-weight: bold;
+      font-size: $font-size;
+      line-height: $line-height;
+    }
+
+    &__Footer {
+      display: flex;
+      justify-content: space-between;
+      padding: 5px $spacing;
+      color: $color-body-subtler;
+      font-size: 10px;
+    }
+  }
+}

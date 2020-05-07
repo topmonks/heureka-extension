@@ -32,7 +32,7 @@ describe("heureka-extension", () => {
         // shop.origin is e.g. `cz,sk`
 
         cy.visit(url + "/" + shop.exampleProductPath);
-        cy.get(".HeurekaContainer").should("be.visible");
+        cy.get("#HeurekaContainer").should("be.visible");
         cy.screenshot(niceUrl, { capture: "viewport" });
       });
     }
