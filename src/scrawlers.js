@@ -1,14 +1,14 @@
 // `test`, `name`, and `price` properties accepts either string or function
 // Check `liveTimeBaby` function in `inject.js` for implementation
 
-// `render` property accepts object with target, position, style, className, and tag properties
+// `render` property accepts object with target, position, style, and tag properties
 // Check helpers.js for implementation
 
 const bsshop = {
   test: "#PDMaster",
   name: "h1",
   price: ".PDTable .price.primary.user",
-  render: { target: "#PDAvailabilityPanel", style: "margin-top: -32px; margin-bottom: -32px;" },
+  render: { target: "#PDAvailabilityPanel, #PDActionPanel", style: "margin-top: -32px; margin-bottom: -32px;" },
 };
 
 const scrawlers = {

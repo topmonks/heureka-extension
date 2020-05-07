@@ -1,10 +1,3 @@
-function create({ className, tag = "div", style } = {}) {
-  const el = document.createElement(tag);
-  if (className) el.classList.add(className);
-  if (style) el.setAttribute("style", style);
-  return el;
-}
-
 /**
  * @param selector
  * @param {('beforebegin'|'afterbegin'|'beforeend'|'afterend')} position
@@ -15,7 +8,9 @@ function create({ className, tag = "div", style } = {}) {
  */
 const insert = (selector, position = "afterend", attributes) => {
   const target = document.querySelector(selector);
-  const el = create(attributes);
+  const el = document.createElement("div");
+  el.setAttribute("id", "HeurekaContainer");
+  if (attributes.style) el.setAttribute("style", attributes.style);
   target.insertAdjacentElement(position, el);
   return el;
 };
@@ -65,7 +60,6 @@ function parsePrice(string) {
 /* eslint-enable */
 
 module.exports = {
-  create,
   insert,
   parsePrice
 };
