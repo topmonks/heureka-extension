@@ -1,8 +1,9 @@
 .HeurekaBox {
   max-width: 800px;
+  margin: 16px 0;
   background: #fff;
-  box-shadow: 0px 10px 20px rgba(126, 80, 211, 0.48);
-  margin: 32px 0;
+  border-radius: 14px;
+  border: 1px solid #E8E8E8;
 }
 
 .HeurekaBox * {
@@ -20,6 +21,8 @@
 .HeurekaBox__Header {
   min-height: 24px;
   background: #7e50d3;
+  border-top-left-radius: 14px;
+  border-top-right-radius: 14px;
   padding: 16px;
   color: #fff;
   font-family: Arial;
@@ -106,7 +109,9 @@
 }
 
 .HeurekaBox__Footer {
-  padding: 8px 16px;
+  padding: 5px 16px;
   text-align: right;
   color: #595959;
+  margin: 0 !important;
+  font-size: 10px;
 }
