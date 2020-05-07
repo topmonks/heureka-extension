@@ -40,7 +40,7 @@ module.exports = (env, argv) => ({
           "manifest.json" // Handled separately
         ] },
       { context: "src", from: "manifest.json", transform: buffer => transformManifest(buffer, argv.mode) },
-      { context: "src", from: "*.css", transform: (buffer, file) => sass.renderSync({ file }).css.toString() }
+      { context: "src", from: "*.scss", to: "[name].css", transform: (buffer, file) => sass.renderSync({ file }).css.toString() }
     ]),
     new ExtensionReloader({
       entries: {

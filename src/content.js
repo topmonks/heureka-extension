@@ -93,7 +93,7 @@ async function liveTimeBaby() {
         scrawler.render.target,
         scrawler.render.position,
         {
-          className: scrawler.render.className || "HeurekaContainer",
+          id: "HeurekaContainer",
           style: scrawler.render.style
         }
       );
@@ -188,9 +188,8 @@ const makeHeurekaBox = ({ productName, products, productsAreNotCheaper }) => {
     productPrice.innerText = product.price + " *";
     productPrice.classList.add("HeurekaBox__ProductPrice");
 
-    const infoColumn = document.createElement("a");
+    const infoColumn = document.createElement("div");
     infoColumn.classList.add("HeurekaBox__ProductInfoColumn");
-    infoColumn.href = product.desktop_url;
 
     infoColumn.appendChild(productName);
     infoColumn.appendChild(productCategory);
