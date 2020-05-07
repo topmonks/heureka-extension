@@ -260,6 +260,14 @@ const scrawlers = {
     origin: "https://www.kupkolo.cz",
     exampleProductPath: "helma-met-20-miles-bila_z97037/",
   },
+  "online-sport": {
+    test: "#listing-all .detail",
+    name: "h1",
+    price: ".detail-right-price-price b",
+    render: { target: ".detail-top", position: "beforeend" },
+    origin: "https://www.online-sport.cz",
+    exampleProductPath: "batohy/turisticke-batohy/osprey-ariel-ag-55-lady-tidal-blue-wm/"
+  },
 
   /*
   template: {

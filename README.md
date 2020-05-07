@@ -47,6 +47,7 @@ Rozšíření vzniklo pro usnadnění vyhledávání a porovnávání cen produk
 - [x] [mironet.cz](https://www.mironet.cz)
 - [x] [mojekolo.cz](https://www.mojekolo.cz)
 - [x] [mountfield.cz](https://www.mountfield.cz), [mountfield.sk](https://www.mountfield.sk)
+- [x] [online-sport.cz](https://wwww.online-sport.cz)
 - [x] [eshop.progresscycle.cz](https://eshop.progresscycle.cz)
 - [x] [electroworld.cz](https://www.electroworld.cz)
 - [x] [sport95.cz](https://www.sport95.cz)
