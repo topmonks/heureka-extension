@@ -80,7 +80,7 @@ const scrawlers = {
     test: "#stoitem_detail",
     name: "h1",
     price: ".price",
-    render: { target: ".product-tools" },
+    render: { target: ".product-tools", style: "width: 100%;" },
     origin: "https://www.tsbohemia.cz",
     exampleProductPath: "apple-iphone-11-64gb-purple-mwlx2cn-a-_d333467.html",
   },
