@@ -207,9 +207,14 @@ const makeHeurekaBox = ({ productName, products, productsAreNotCheaper }) => {
 
   box.appendChild(list);
 
-  const footer = document.createElement("p");
+  const footer = document.createElement("div");
   footer.classList.add("HeurekaBox__Footer");
-  footer.innerHTML = "* cena vč. DPH a nemusí být konečná";
+  const footerMoreInfo = document.createElement("div");
+  footerMoreInfo.innerHTML = "Více informací na <a href='https://github.com/topmonks/heureka-extension/'>GitHub</a>";
+  const footerDisclaimer = document.createElement("div");
+  footerDisclaimer.innerHTML = "* cena vč. DPH a nemusí být konečná";
+  footer.appendChild(footerMoreInfo);
+  footer.appendChild(footerDisclaimer);
 
   box.appendChild(footer);
 
