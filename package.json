@@ -9,6 +9,7 @@
   },
   "scripts": {
     "build": "webpack --mode=production",
+    "build-and-zip": "rm -rf build build.zip && npm run build && cd build && zip -r ../build.zip ./ && echo '\n=== build.zip prepared ===\n'",
     "develop": "webpack --mode=development --watch",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
