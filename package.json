@@ -30,5 +30,8 @@
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11",
     "webpack-extension-reloader": "^1.1.4"
+  },
+  "dependencies": {
+    "webextension-polyfill": "^0.6.0"
   }
 }
