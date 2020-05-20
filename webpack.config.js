@@ -25,7 +25,6 @@ function transformManifest(buffer, mode) {
 }
 
 module.exports = (env, argv) => ({
-  devtool: "source-map",
   entry: {
     background: "./src/background",
     content: "./src/content"
@@ -49,6 +48,9 @@ module.exports = (env, argv) => ({
       }
     }),
   ],
+  optimization: {
+    minimize: false, // Google Web Store: Code Readability Requirements
+  },
   output: {
     path: path.join(__dirname, "build"),
     filename: "[name].js"
