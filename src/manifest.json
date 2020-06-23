@@ -23,6 +23,7 @@
     {
       "matches": [],
       "js": [
+        "arrive.js",
         "browser-polyfill.js",
         "content.js"
       ],
