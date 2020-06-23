@@ -1,32 +1,7 @@
 const scrawlers = require("./scrawlers");
 const { insert, parsePrice } = require("./helpers");
 
-const isChrome = Boolean(window.chrome);
-const sendMessageToBackground = (query = null, payload = null) => {
-  const meta = {
-    hostname: location.hostname
-  };
-
-  if (isChrome) {
-    return new Promise(resolve => {
-      chrome.extension.sendMessage({ query, meta, payload }, resolve);
-    });
-  }
-
-  return browser.runtime.sendMessage({ query, meta, payload });
-};
-
-// Enter here :)
-sendMessageToBackground().then(() => {
-  var readyStateCheckInterval = setInterval(() => {
-    if (document.readyState === "complete") {
-      clearInterval(readyStateCheckInterval);
-      liveTimeBaby();
-    }
-  }, 10);
-});
-
-async function liveTimeBaby() {
+(async () => {
   console.group("Porovnání cen by TopMonks");
 
   const scrawler = scrawlers[location.hostname.split(".").reverse()[1]];
@@ -65,7 +40,14 @@ async function liveTimeBaby() {
     // Continue even without price
   }
 
-  const foundProducts = await sendMessageToBackground("Najdi mi prosimtě tohle zbožíčko", name);
+  const tld = window.location.hostname.split(".").reverse()[0];
+  const foundProducts = await browser.runtime.sendMessage({
+    query: "SEARCH",
+    payload: {
+      name,
+      apiUrl: `https://api.heureka.${tld}`
+    }
+  });
 
   if (!foundProducts.length) {
     console.log("No products found.", { name });
@@ -107,7 +89,7 @@ async function liveTimeBaby() {
     productsAreNotCheaper,
     productName: name
   }));
-}
+})();
 
 /**
  *  Products Box UI
