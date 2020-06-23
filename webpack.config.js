@@ -48,6 +48,7 @@ module.exports = (env, argv) => ({
       }
     }),
   ],
+  devtool: "cheap-module-source-map", // To avoid: Refused to evaluate a string as JavaScript because 'unsafe-eval'
   optimization: {
     minimize: false, // Google Web Store: Code Readability Requirements
   },

@@ -268,6 +268,25 @@ const scrawlers = {
     origin: "https://www.online-sport.cz",
     exampleProductPath: "batohy/turisticke-batohy/osprey-ariel-ag-55-lady-tidal-blue-wm/"
   },
+  benu: {
+    test: "#product-detail",
+    name: "h1",
+    price: ".buy-box__big-price",
+    render: { target: ".product-desc", position: "beforeend" },
+    origin: "https://www.benu.cz",
+    exampleProductPath: "ibalgin-400-peroralni-potahovane-tablety-36x400mg"
+  },
+  pilulka: {
+    test: ".product-detail__header",
+    name: ".product-detail__header",
+    price: "[class*='js-product-price-']",
+    render: { target: "[class^='product-detail'] .bg-grey-light.rounded", position: "afterend" },
+    origin: "https://www.pilulka.cz",
+    exampleProductPath: "ibalgin-rapidcaps-400mg-cps-mol-30x400mg"
+  },
+  // TODO:
+  // itesco
+  // kosik
 
   /*
   template: {
