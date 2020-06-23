@@ -33,6 +33,10 @@ describe("heureka-extension", () => {
 
         cy.visit(url + "/" + shop.exampleProductPath);
         cy.get("#HeurekaContainer").should("be.visible");
+
+        // Should not be needed, but actually is for Pilulka – without wait, no text is rendered
+        cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
+
         cy.screenshot(niceUrl, { capture: "viewport" });
       });
     }
