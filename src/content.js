@@ -12,8 +12,11 @@ const { insert, parsePrice } = require("./helpers");
   }
 
   if (typeof scrawler.test === "string") {
-    document.arrive(scrawler.test, { existing: true }, () => {
-      work(scrawler);
+    document.arrive(scrawler.test, { existing: true }, newElem => {
+      // Run only once if there's multiple elements on the page
+      if (Array.from(document.querySelectorAll(scrawler.test)).indexOf(newElem) === 0) {
+        work(scrawler);
+      }
     });
   } else if (typeof scrawler.test === "function") {
     scrawler.test(() => work(scrawler));
