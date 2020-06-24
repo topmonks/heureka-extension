@@ -11,78 +11,87 @@ const { insert, parsePrice } = require("./helpers");
     return; // Do not continue
   }
 
-  document.arrive(scrawler.test, { existing: true }, async () => {
-    let name;
-    try {
-      name = typeof scrawler.name === "function"
-        ? scrawler.name()
-        : document.querySelector(scrawler.name).innerText;
-    } catch (e) {
-      console.warn("Getting `name` failed:", e);
-      return; // Do not continue
-    }
-
-    let price;
-    try {
-      price = typeof scrawler.price === "function"
-        ? scrawler.price()
-        : parsePrice(document.querySelector(scrawler.price).innerText).toFixed(0);
-    } catch (e) {
-      console.warn("Getting `price` failed:", e);
-      // Continue even without price
-    }
-
-    const tld = window.location.hostname.split(".").reverse()[0];
-    const foundProducts = await browser.runtime.sendMessage({
-      query: "SEARCH",
-      payload: {
-        name,
-        apiUrl: `https://api.heureka.${tld}`
-      }
+  if (typeof scrawler.test === "string") {
+    document.arrive(scrawler.test, { existing: true }, () => {
+      work(scrawler);
     });
-
-    if (!foundProducts.length) {
-      console.log("No products found.", { name });
-    }
-
-    const heurekaPrices =
-      foundProducts.length > 0
-        ? foundProducts.map(product => parsePrice(product.price))
-        : [];
-
-    console.log("Summary", { productName: name, productPrice: price, heurekaPrices, foundProducts });
-
-    const productsAreNotCheaper =
-      Boolean(heurekaPrices.find(x => x < price)) === false;
-
-    if (productsAreNotCheaper) {
-      console.log("Products are not cheaper", { price });
-    }
-
-    let boxRoot;
-    try {
-      boxRoot = typeof scrawler.render === "function"
-        ? scrawler.render() // TODO: Consider providing some useful info for that function
-        : insert(
-          scrawler.render.target,
-          scrawler.render.position,
-          {
-            id: "HeurekaContainer",
-            style: scrawler.render.style
-          }
-        );
-    } catch (e) {
-      console.warn("Inserting widget into DOM failed:", e);
-      return; // Do not continue
-    }
-
-    boxRoot.appendChild(makeHeurekaBox({
-      products: foundProducts,
-      productsAreNotCheaper,
-      productName: name
-    }));
-  });
+  } else if (typeof scrawler.test === "function") {
+    scrawler.test(() => work(scrawler));
+  }
 })();
+
+async function work(scrawler) {
+  // Remove existing, important for some Single page applications
+  if (document.querySelector("#HeurekaContainer")) document.querySelector("#HeurekaContainer").remove();
+
+  let name;
+  try {
+    name = typeof scrawler.name === "function"
+      ? scrawler.name()
+      : document.querySelector(scrawler.name).innerText;
+  } catch (e) {
+    console.warn("Getting `name` failed:", e);
+    return; // Do not continue
+  }
+
+  let price;
+  try {
+    price = typeof scrawler.price === "function"
+      ? scrawler.price()
+      : parsePrice(document.querySelector(scrawler.price).innerText).toFixed(0);
+  } catch (e) {
+    console.warn("Getting `price` failed:", e);
+    // Continue even without price
+  }
+
+  const tld = window.location.hostname.split(".").reverse()[0];
+  const foundProducts = await browser.runtime.sendMessage({
+    query: "SEARCH",
+    payload: {
+      name,
+      apiUrl: `https://api.heureka.${tld}`
+    }
+  });
+
+  if (!foundProducts.length) {
+    console.log("No products found.", { name });
+  }
+
+  const heurekaPrices =
+    foundProducts.length > 0
+      ? foundProducts.map(product => parsePrice(product.price))
+      : [];
+
+  console.log("Summary", { productName: name, productPrice: price, heurekaPrices, foundProducts });
+
+  const productsAreNotCheaper =
+    Boolean(heurekaPrices.find(x => x < price)) === false;
+
+  if (productsAreNotCheaper) {
+    console.log("Products are not cheaper", { price });
+  }
+
+  let boxRoot;
+  try {
+    boxRoot = insert(
+      scrawler.render.target,
+      scrawler.render.position,
+      {
+        id: "HeurekaContainer",
+        style: scrawler.render.style
+      }
+    );
+  } catch (e) {
+    console.warn("Inserting widget into DOM failed:", e);
+    return; // Do not continue
+  }
+
+  boxRoot.appendChild(makeHeurekaBox({
+    products: foundProducts,
+    productsAreNotCheaper,
+    productName: name
+  }));
+}
 
 /**
  *  Products Box UI
