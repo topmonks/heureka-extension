@@ -15,7 +15,8 @@
     "lint:fix": "eslint --fix .",
     "test": "jest",
     "cypress:open": "cypress open",
-    "generate-info": "node generate-info.js"
+    "generate-info": "node generate-info.js",
+    "open-all-examples-in-browser": "node utils/openAllExamplesInBrowser.js"
   },
   "devDependencies": {
     "copy-webpack-plugin": "^5.1.1",
