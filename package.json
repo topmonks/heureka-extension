@@ -15,7 +15,8 @@
     "lint:fix": "eslint --fix .",
     "test": "jest",
     "cypress:open": "cypress open",
-    "generate-info": "node generate-info.js"
+    "generate-info": "node generate-info.js",
+    "open-all-examples-in-browser": "node utils/openAllExamplesInBrowser.js"
   },
   "devDependencies": {
     "copy-webpack-plugin": "^5.1.1",
@@ -33,6 +34,7 @@
     "webpack-extension-reloader": "^1.1.4"
   },
   "dependencies": {
+    "arrive": "^2.4.1",
     "webextension-polyfill": "^0.6.0"
   }
 }

@@ -40,7 +40,8 @@ module.exports = (env, argv) => ({
         ] },
       { context: "src", from: "manifest.json", transform: buffer => transformManifest(buffer, argv.mode) },
       { context: "src", from: "*.scss", to: "[name].css", transform: (buffer, file) => sass.renderSync({ file }).css.toString() },
-      { from: "node_modules/webextension-polyfill/dist/browser-polyfill.js" }
+      { from: "node_modules/webextension-polyfill/dist/browser-polyfill.js" },
+      { from: "node_modules/arrive/src/arrive.js" }
     ]),
     new ExtensionReloader({
       entries: {

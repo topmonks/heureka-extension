@@ -11,14 +11,21 @@ const { insert, parsePrice } = require("./helpers");
     return; // Do not continue
   }
 
-  const isProductPage = typeof scrawler.test === "function"
-    ? scrawler.test()
-    : Boolean(document.querySelector(scrawler.test));
-
-  if (!isProductPage) {
-    console.log("Not a product page.");
-    return; // Do not continue
+  if (typeof scrawler.test === "string") {
+    document.arrive(scrawler.test, { existing: true }, newElem => {
+      // Run only once if there's multiple elements on the page
+      if (Array.from(document.querySelectorAll(scrawler.test)).indexOf(newElem) === 0) {
+        work(scrawler);
+      }
+    });
+  } else if (typeof scrawler.test === "function") {
+    scrawler.test(() => work(scrawler));
   }
+})();
+
+async function work(scrawler) {
+  // Remove existing, important for some Single page applications
+  if (document.querySelector("#HeurekaContainer")) document.querySelector("#HeurekaContainer").remove();
 
   let name;
   try {
@@ -69,16 +76,14 @@ const { insert, parsePrice } = require("./helpers");
 
   let boxRoot;
   try {
-    boxRoot = typeof scrawler.render === "function"
-      ? scrawler.render() // TODO: Consider providing some useful info for that function
-      : insert(
-        scrawler.render.target,
-        scrawler.render.position,
-        {
-          id: "HeurekaContainer",
-          style: scrawler.render.style
-        }
-      );
+    boxRoot = insert(
+      scrawler.render.target,
+      scrawler.render.position,
+      {
+        id: "HeurekaContainer",
+        style: scrawler.render.style
+      }
+    );
   } catch (e) {
     console.warn("Inserting widget into DOM failed:", e);
     return; // Do not continue
@@ -89,7 +94,7 @@ const { insert, parsePrice } = require("./helpers");
     productsAreNotCheaper,
     productName: name
   }));
-})();
+}
 
 /**
  *  Products Box UI

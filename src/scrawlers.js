@@ -284,9 +284,50 @@ const scrawlers = {
     origin: "https://www.pilulka.cz",
     exampleProductPath: "ibalgin-rapidcaps-400mg-cps-mol-30x400mg"
   },
-  // TODO:
-  // itesco
-  // kosik
+  itesco: {
+    test: ".product-details-page",
+    name: "h1",
+    price: ".price-per-sellable-unit .value",
+    render: { target: ".product-controls__wrapper", position: "afterend", style: "clear: both; padding: 6px;" },
+    origin: "https://nakup.itesco.cz",
+    exampleProductPath: "groceries/cs-CZ/products/2001020019786"
+  },
+  kosik: {
+    test: ".product-detail__main-info",
+    name: "h1.product-detail__main-info__name",
+    price: ".price__actual-price",
+    render: { target: ".product-detail__main-info", position: "beforeend", style: "clear: both; padding: 6px;" },
+    origin: "https://www.kosik.cz",
+    exampleProductPath: "produkt/calvo-tunak-v-olivovem-oleji-3x80g"
+  },
+  notino: {
+    test: cb => {
+      const testElem = document.querySelector("#pdHeader");
+      if (!testElem) return;
+
+      let lastUrl = null;
+      new MutationObserver((() => {
+        if (location.pathname !== lastUrl) {
+          lastUrl = location.pathname;
+          cb();
+        }
+      })).observe(document.body, {
+        characterData: true,
+        subtree: true
+      });
+
+      cb();
+    },
+    name: () => {
+      const name = document.querySelector("h1 [class*=Brand]").innerText + " " + document.querySelector("h1 [class*=Span]").innerText;
+      const variant = document.querySelector("#pdSelectedVariant [class*=Name]") ? " " + document.querySelector("#pdSelectedVariant [class*=Name]").innerText : "";
+      return name + variant;
+    },
+    price: "#pd-price",
+    render: { target: "#pdAddToCart", position: "afterend" },
+    origin: "https://www.notino.cz",
+    exampleProductPath: "calvin-klein/euphoria-parfemovana-voda-pro-zeny/"
+  },
 
   /*
   template: {
