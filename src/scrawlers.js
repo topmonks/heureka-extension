@@ -54,9 +54,9 @@ const scrawlers = {
   },
   mall: {
     test: "[data-sel=catalog-number]",
-    name: "h1[itemprop=name]",
-    price: "[itemprop=price]",
-    render: { target: ".detail-prices-wrapper, .product-footer" },
+    name: "h1.detail__title",
+    price: ".price__wrap__box__final",
+    render: { target: ".detail__additional-info-wrapper, .product-footer" },
     origin: "https://www.mall.{cz,sk}",
     exampleProductPath: "mobilni-telefony/apple-iphone-11-64gb-black",
   },
