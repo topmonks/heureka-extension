@@ -293,10 +293,10 @@ const scrawlers = {
     exampleProductPath: "groceries/cs-CZ/products/2001020019786"
   },
   kosik: {
-    test: ".product-detail__main-info",
-    name: "h1.product-detail__main-info__name",
-    price: ".price__actual-price",
-    render: { target: ".product-detail__main-info", position: "beforeend", style: "clear: both; padding: 6px;" },
+    test: "[data-tid='product-detail']",
+    name: "h1.product-name",
+    price: ".product-price",
+    render: { target: ".product-header-box", position: "afterend", style: "clear: both; width: 100%;" },
     origin: "https://www.kosik.cz",
     exampleProductPath: "produkt/calvo-tunak-v-olivovem-oleji-3x80g"
   },
