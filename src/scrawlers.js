@@ -69,10 +69,10 @@ const scrawlers = {
     exampleProductPath: "apple-iphone-11-64gb-cerna-61quot-hexacore-4gb-64gb-12mp12mp12mp-ios13+dp409453/",
   },
   mountfield: {
-    test: ".productDetail",
+    test: ".box-detail__info",
     name: "h1",
-    price: ".actionPrice.val",
-    render: { target: ".btnBuy" },
+    price: () => document.querySelector("[itemprop=price]").getAttribute("content"),
+    render: { target: ".box-detail__info", position: "beforeend" },
     origin: "https://www.mountfield.{cz,sk}",
     exampleProductPath: "sekera-patriot-l-73-cm/1900-g-1zst4100",
   },
