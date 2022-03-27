@@ -64,7 +64,7 @@ const scrawlers = {
     test: ".product_detail",
     name: "h1",
     price: ".product_cena_box .product_dph",
-    render: { target: ".product_kosik_info" },
+    render: { target: ".product_pravy", position: "beforeend" },
     origin: "https://www.mironet.cz",
     exampleProductPath: "apple-iphone-11-64gb-cerna-61quot-hexacore-4gb-64gb-12mp12mp12mp-ios13+dp409453/",
   },
