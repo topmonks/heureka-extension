@@ -319,12 +319,21 @@ const scrawlers = {
       cb();
     },
     name: () => {
-      const name = document.querySelector("h1 [class*=Brand]").innerText + " " + document.querySelector("h1 [class*=Span]").innerText;
-      const variant = document.querySelector("#pdSelectedVariant [class*=Name]") ? " " + document.querySelector("#pdSelectedVariant [class*=Name]").innerText : "";
-      return name + variant;
+      // eslint-disable-next-line max-len
+      // const name = document.querySelector("h1 [class*=Brand]").innerText + " " + document.querySelector("h1 [class*=Span]").innerText;
+      // eslint-disable-next-line max-len
+      // const variant = document.querySelector("#pdSelectedVariant [class*=Name]") ? " " + document.querySelector("#pdSelectedVariant [class*=Name]").innerText : "";
+      // return name + variant;
+
+      // TODO: Not ideal, does not work with variants all the time
+      return document.title.split("|")[0].trim();
     },
     price: "#pd-price",
-    render: { target: "#pdAddToCart", position: "afterend" },
+    render: {
+      target: () => document.querySelector("#pdAddToCart").parentElement,
+      position: "afterend",
+      style: "clear: both;"
+    },
     origin: "https://www.notino.cz",
     exampleProductPath: "calvin-klein/euphoria-parfemovana-voda-pro-zeny/"
   },

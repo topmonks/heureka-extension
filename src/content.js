@@ -76,8 +76,10 @@ async function work(scrawler) {
 
   let boxRoot;
   try {
+    let { target } = scrawler.render;
+    if (typeof target === "function") target = target();
     boxRoot = insert(
-      scrawler.render.target,
+      target,
       scrawler.render.position,
       {
         id: "HeurekaContainer",

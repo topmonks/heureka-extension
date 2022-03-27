@@ -1,13 +1,13 @@
 /**
- * @param selector
+ * @param selectorOrEl
  * @param {('beforebegin'|'afterbegin'|'beforeend'|'afterend')} position
  * @param attributes
  * @param attributes.style
  * @param attributes.tag
  * @param attributes.className
  */
-const insert = (selector, position = "afterend", attributes) => {
-  const target = document.querySelector(selector);
+const insert = (selectorOrEl, position = "afterend", attributes) => {
+  const target = typeof selectorOrEl === "string" ? document.querySelector(selectorOrEl) : selectorOrEl;
   const el = document.createElement("div");
   el.setAttribute("id", "HeurekaContainer");
   if (attributes.style) el.setAttribute("style", attributes.style);
