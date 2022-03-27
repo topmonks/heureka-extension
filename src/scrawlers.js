@@ -82,7 +82,7 @@ const scrawlers = {
     price: ".price",
     render: { target: ".product-tools", style: "width: 100%;" },
     origin: "https://www.tsbohemia.cz",
-    exampleProductPath: "apple-iphone-11-64gb-purple-mwlx2cn-a-_d333467.html",
+    exampleProductPath: "apple-iphone-12-64gb-black-mgj53cn-a-_d364434.html",
   },
   alfa: {
     test: ".prodinfo",
@@ -101,10 +101,10 @@ const scrawlers = {
     exampleProductPath: "apple-ipad-9-7-2018-wi-fi-128gb-gold/",
   },
   electroworld: {
-    test: ".product-top__title",
-    name: ".product-top__title",
-    price: ".product-top__price strong",
-    render: { target: ".product-top__cta" },
+    test: ".product-box__parameters",
+    name: "h1",
+    price: ".product-top__prices .typo-complex-lg-32",
+    render: { target: "#product-detail-actions" },
     origin: "https://www.electroworld.cz",
     exampleProductPath: "apple-iphone-11-64-gb-cerny",
   },
