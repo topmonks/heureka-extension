@@ -29,10 +29,10 @@ const scrawlers = {
     exampleProductPath: "apple-iphone-11-64gb-black/269718/produkt",
   },
   datart: {
-    test: "#product-detail-info",
+    test: ".product-detail-essential",
     name: "h1",
-    price: ".product-detail-price",
-    render: { target: ".product-detail-compare-box" },
+    price: ".product-price-main",
+    render: { target: ".product-availability" },
     origin: "https://www.datart.{cz,sk}",
     exampleProductPath: "iphone-11-64gb-black-mwlt2cn-a.html",
   },
