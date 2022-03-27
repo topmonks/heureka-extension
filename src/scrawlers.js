@@ -154,10 +154,10 @@ const scrawlers = {
     exampleProductPath: "p/maly-princ-9788074514258/",
   },
   kolokram: {
-    test: "body#product",
+    test: "body.ProductDetailState",
     name: "h1",
-    price: "#our_price_display",
-    render: { target: ".pb-center-column", position: "beforeend", style: "clear: both;" },
+    price: "#PDTable .primary.user",
+    render: { target: "#PDVariantSelector", position: "beforeend", style: "clear: both;" },
     origin: "https://www.kolokram.cz",
     exampleProductPath: "rukavice/185110-rukavice-specialized-body-geometry-sport-gel-black-l.html",
   },
