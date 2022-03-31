@@ -3,13 +3,11 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const ExtensionReloader = require("webpack-extension-reloader");
 const sass = require("node-sass");
 
-const scrawlers = require("./src/scrawlers");
+const scrawlers = require("./extension/scrawlers");
 const simpleBraceExpansion = require("./utils/simpleBraceExpansion");
-const pkg = require("./package.json");
 
 function transformManifest(buffer, mode) {
   const manifest = JSON.parse(buffer.toString());
-  manifest.version = pkg.version;
   for (const key of Object.keys(scrawlers).sort()) {
     const scrawler = scrawlers[key];
     const origins = simpleBraceExpansion(scrawler.origin);
@@ -26,20 +24,20 @@ function transformManifest(buffer, mode) {
 
 module.exports = (env, argv) => ({
   entry: {
-    background: "./src/background",
-    content: "./src/content"
+    background: "./extension/background",
+    content: "./extension/content"
   },
   plugins: [
     new CopyWebpackPlugin([
-      { context: "src",
+      { context: "extension",
         from: "**",
         ignore: [
           "*.js", // Handled by Webpack core
           "*.scss", // Handled separately
           "manifest.json" // Handled separately
         ] },
-      { context: "src", from: "manifest.json", transform: buffer => transformManifest(buffer, argv.mode) },
-      { context: "src", from: "*.scss", to: "[name].css", transform: (buffer, file) => sass.renderSync({ file }).css.toString() },
+      { context: "extension", from: "manifest.json", transform: buffer => transformManifest(buffer, argv.mode) },
+      { context: "extension", from: "*.scss", to: "[name].css", transform: (buffer, file) => sass.renderSync({ file }).css.toString() },
       { from: "node_modules/webextension-polyfill/dist/browser-polyfill.js" },
       { from: "node_modules/arrive/src/arrive.js" }
     ]),
@@ -55,7 +53,7 @@ module.exports = (env, argv) => ({
     minimize: false, // Google Web Store: Code Readability Requirements
   },
   output: {
-    path: path.join(__dirname, "build"),
+    path: path.join(__dirname, "extension-build"),
     filename: "[name].js"
   }
 });

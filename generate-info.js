@@ -1,4 +1,4 @@
-const scrawlers = require("./src/scrawlers");
+const scrawlers = require("./extension/scrawlers");
 const simpleBraceExpansion = require("./utils/simpleBraceExpansion");
 
 const items = [];
