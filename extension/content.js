@@ -128,7 +128,7 @@ const makeHeurekaBox = ({ productName, products, productsAreNotCheaper, scrawler
 
   title.style.cursor = "pointer";
   title.onclick = () => {
-    const adjusted = window.prompt(
+    const adjusted = window.prompt( // eslint-disable-line no-alert
       "Upravte název produktu a zkuste to znovu",
       productName
     );

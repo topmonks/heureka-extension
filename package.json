@@ -1,34 +1,50 @@
 {
   "name": "heureka-extension",
-  "description": "Rozšíření vzniklo pro usnadnění vyhledávání a porovnávání cen produktů na českých i slovenských eshopech. Celý příběh vzniku Porovnávače cen se dočtete [zde](https://blog.topmonks.com/ako-sme-chceli-dosta%C5%A5-heur%C3%A9ku-do-alzy-c51378799d89).",
+  "description": "Rozšíření pro usnadnění vyhledávání a porovnávání cen produktů na českých i slovenských eshopech. Celý příběh vzniku Porovnávače cen se dočtete [zde](https://blog.topmonks.com/ako-sme-chceli-dosta%C5%A5-heur%C3%A9ku-do-alzy-c51378799d89).",
   "homepage": "https://github.com/topmonks/heureka-extension",
-  "version": "2.1.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/topmonks/heureka-extension.git"
   },
+  "meta": {
+    "name": "Porovnání cen",
+    "chromeWebStoreId": "jmhkgcmmgjblnkjkbgjggkaeifacakgi"
+  },
   "scripts": {
-    "build": "webpack --mode=production",
-    "build-and-zip": "rm -rf build build.zip && npm run build && cd build && zip -r ../build.zip ./ && echo '\n=== build.zip prepared ===\n'",
+    "//dev": "Scripts for development",
     "develop": "webpack --mode=development --watch",
+    "start:chrome": "web-ext run --target=chromium",
+    "cypress:open": "cypress open",
+    "generate-info": "node generate-info.js",
+    "open-all-examples-in-browser": "node utils/openAllExamplesInBrowser.js",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "test": "jest",
-    "cypress:open": "cypress open",
-    "generate-info": "node generate-info.js",
-    "open-all-examples-in-browser": "node utils/openAllExamplesInBrowser.js"
+
+    "//publish": "Scripts for publishing",
+    "update-version": "dot-json extension/manifest.json version $(date -u +%y.%-m.%-d.%-H%M)",
+    "npm run tag-version-and-push-to-trigger-publish": "git push origin tag v$(dot-json extension/manifest.json version)",
+
+    "//ci": "Scripts for CI",
+    "build": "webpack --mode=production",
+    "build:chrome": "npm run build && web-ext build --overwrite-dest --filename 'chrome-extension.zip'",
+    "publish:chrome": "chrome-webstore-upload upload --auto-publish --extension-id=jmhkgcmmgjblnkjkbgjggkaeifacakgi --source='extension-dist/chrome-extension.zip'"
   },
   "devDependencies": {
+    "chrome-webstore-upload-cli": "^2.0.1",
     "copy-webpack-plugin": "^5.1.1",
     "cypress": "^3.8.3",
     "cypress-browser-extension-plugin": "^0.1.0",
     "cypress-skip-and-only-ui": "^1.2.6",
+    "dot-json": "^1.2.2",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-plugin-cypress": "^2.10.3",
     "eslint-plugin-import": "^2.20.2",
     "jest": "^25.4.0",
     "node-sass": "^4.14.1",
+    "web-ext": "^6.8.0",
+    "web-ext-submit": "^6.8.0",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11",
     "webpack-extension-reloader": "^1.1.4"

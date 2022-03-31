@@ -1,4 +1,4 @@
 .DS_Store
-build.zip
-build/
+extension-build/
+extension-dist/
 /cypress/other-extensions/unpacked/

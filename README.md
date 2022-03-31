@@ -63,10 +63,18 @@ Rozšíření vzniklo pro usnadnění vyhledávání a porovnávání cen produk
 - [x] [tsbohemia.cz](https://www.tsbohemia.cz)
 - [x] [velosport.cz](https://www.velosport.cz)
 
+#### Development
 
-#### Jak přidat vlastní oblíbený eshop?
-1. přidat adresu eshopu do `permissions` a `content_scripts` v `manifest.js`
-2. přidat záznám do `scrawlers` v `src/scrawlers.js`
+ℹ️ E-shop specific logic is in `extension/scrawlers.js`
+
+#### Publishing
+
+ℹ️ Automatic publishing from master on git tags starting with `v` (short for version)
+
+* Make changes, test, commit, push
+* `npm run update-version` -> will update version in `manifest.json` to current date & time formatted as valid version number, e.g. 22.3.31.1107 (= 2022/03/31 11:07)
+* `git commit -m "[bump version]" && git push`
+* `npm run tag-version-and-push-to-trigger-publish`
 
 ### Heureka API
 Heureka does not provide a public API so we are using Heureka's search suggestions to find products.

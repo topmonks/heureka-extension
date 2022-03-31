@@ -1,5 +1,5 @@
 const { execSync } = require("child_process");
-const scrawlers = require("../src/scrawlers");
+const scrawlers = require("../extension/scrawlers");
 const simpleBraceExpansion = require("./simpleBraceExpansion");
 
 const SPECIFIC_BROWSER = "Google Chrome Dev"; // feel free to adjust to your needs, or clear to use default browser
