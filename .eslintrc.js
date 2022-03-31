@@ -8,6 +8,7 @@ module.exports = {
   },
   "rules": {
     "quotes": ["error", "double"],
+    "max-len": ["error", { "code": 200 }],
 
     // Consider re-enabling (some of) following rules
     // Right now, disabled to avoid massive reformatting

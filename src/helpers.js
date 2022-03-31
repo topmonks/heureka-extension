@@ -59,7 +59,23 @@ function parsePrice(string) {
 }
 /* eslint-enable */
 
+function getTlds() {
+  const originalTld = location.hostname.split(".").reverse()[0];
+  let heurekaTld = originalTld;
+  if (!["cz", "sk"].includes(originalTld)) heurekaTld = "cz";
+  return {
+    originalTld,
+    heurekaTld,
+  };
+}
+
+function log(...args) {
+  console.log("[EXTENSION POROVNÁNÍ CEN]", ...args);
+}
+
 module.exports = {
   insert,
-  parsePrice
+  parsePrice,
+  log,
+  getTlds
 };

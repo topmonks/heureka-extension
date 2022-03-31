@@ -1,29 +1,33 @@
 const scrawlers = require("./scrawlers");
-const { insert, parsePrice } = require("./helpers");
+const { insert, parsePrice, log, getTlds } = require("./helpers");
 
 (async () => {
-  console.group("Porovnání cen by TopMonks");
-
   const scrawler = scrawlers[location.hostname.split(".").reverse()[1]];
 
   if (!scrawler) {
-    console.warn("Website not supported (this shouldn't happen when permissions in manifest.json are correctly configured", { location });
+    log("Website not supported (this shouldn't happen when permissions in manifest.json are correctly configured", { location });
     return; // Do not continue
   }
+
+  log(`Testing whether we are on product page, selector: ${scrawler.test}`);
 
   if (typeof scrawler.test === "string") {
     document.arrive(scrawler.test, { existing: true }, newElem => {
       // Run only once if there's multiple elements on the page
       if (Array.from(document.querySelectorAll(scrawler.test)).indexOf(newElem) === 0) {
+        log("Product page detected, continuing...");
         work(scrawler);
       }
     });
   } else if (typeof scrawler.test === "function") {
-    scrawler.test(() => work(scrawler));
+    scrawler.test(() => {
+      log("Product page detected, continuing...");
+      work(scrawler);
+    });
   }
 })();
 
-async function work(scrawler) {
+async function work(scrawler, overrides = {}) {
   // Remove existing, important for some Single page applications
   if (document.querySelector("#HeurekaContainer")) document.querySelector("#HeurekaContainer").remove();
 
@@ -33,7 +37,7 @@ async function work(scrawler) {
       ? scrawler.name()
       : document.querySelector(scrawler.name).innerText;
   } catch (e) {
-    console.warn("Getting `name` failed:", e);
+    log("Getting `name` failed:", e);
     return; // Do not continue
   }
 
@@ -43,21 +47,21 @@ async function work(scrawler) {
       ? scrawler.price()
       : parsePrice(document.querySelector(scrawler.price).innerText).toFixed(0);
   } catch (e) {
-    console.warn("Getting `price` failed:", e);
+    log("Getting `price` failed:", e);
     // Continue even without price
   }
 
-  const tld = window.location.hostname.split(".").reverse()[0];
+  const { originalTld, heurekaTld } = getTlds();
   const foundProducts = await browser.runtime.sendMessage({
     query: "SEARCH",
     payload: {
       name,
-      apiUrl: `https://api.heureka.${tld}`
+      apiUrl: `https://api.heureka.${heurekaTld}`
     }
   });
 
   if (!foundProducts.length) {
-    console.log("No products found.", { name });
+    log("No products found.", { name });
   }
 
   const heurekaPrices =
@@ -65,13 +69,13 @@ async function work(scrawler) {
       ? foundProducts.map(product => parsePrice(product.price))
       : [];
 
-  console.log("Summary", { productName: name, productPrice: price, heurekaPrices, foundProducts });
+  log("Summary", { productName: name, productPrice: price, heurekaPrices, foundProducts });
 
   const productsAreNotCheaper =
     Boolean(heurekaPrices.find(x => x < price)) === false;
 
   if (productsAreNotCheaper) {
-    console.log("Products are not cheaper", { price });
+    log("Products are not cheaper", { price });
   }
 
   let boxRoot;
@@ -94,14 +98,15 @@ async function work(scrawler) {
   boxRoot.appendChild(makeHeurekaBox({
     products: foundProducts,
     productsAreNotCheaper,
-    productName: name
+    productName: overrides.name || name,
+    scrawler, // pass for easier re-init when overriding TODO: This would deserve different architecture
   }));
 }
 
 /**
  *  Products Box UI
  */
-
+/* eslint-disable max-len */
 const extensionIcon = `
 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
   <g>
@@ -110,15 +115,26 @@ const extensionIcon = `
   </g>
 </svg>
 `;
+/* eslint-enable max-len */
 
-const makeHeurekaBox = ({ productName, products, productsAreNotCheaper }) => {
+const makeHeurekaBox = ({ productName, products, productsAreNotCheaper, scrawler }) => {
   const box = document.createElement("div");
-  const tld = location.hostname.split(".").reverse()[0];
+  const { originalTld, heurekaTld } = getTlds();
 
   box.classList.add("HeurekaBox");
 
   const title = document.createElement("div");
   title.classList.add("HeurekaBox__Header");
+
+  title.style.cursor = "pointer";
+  title.onclick = () => {
+    const adjusted = window.prompt(
+      "Upravte název produktu a zkuste to znovu",
+      productName
+    );
+    if (!adjusted) return;
+    work(scrawler, { name: adjusted });
+  };
 
   if (!products.length) {
     title.classList.add("HeurekaBox__Header--no-result");
@@ -128,7 +144,7 @@ const makeHeurekaBox = ({ productName, products, productsAreNotCheaper }) => {
     const text = document.createElement("p");
     text.classList.add("HeurekaBox__NotFound");
 
-    text.innerHTML = `Srovnejte jiný produkt, <a href="https://www.heureka.${tld}/?h[fraze]=${productName}">nebo ho vyhledejte manuálně</a>.`;
+    text.innerHTML = `Srovnejte jiný produkt, <a href="https://www.heureka.${heurekaTld}/?h[fraze]=${productName}">nebo ho vyhledejte manuálně</a>.`;
 
     box.appendChild(title);
     box.appendChild(text);
@@ -136,7 +152,10 @@ const makeHeurekaBox = ({ productName, products, productsAreNotCheaper }) => {
     return box;
   }
 
-  if (productsAreNotCheaper) {
+  if (
+    productsAreNotCheaper &&
+    ["cz", "sk"].includes(originalTld) // comparing prices makes sense only for cz & sk domains, cause we don't handle currencies
+  ) {
     title.classList.add("HeurekaBox__Title--no-result");
     title.innerHTML = "Cena tohoto produktu je ve srovnávači vyšší";
     title.innerHTML += extensionIcon;
@@ -144,7 +163,7 @@ const makeHeurekaBox = ({ productName, products, productsAreNotCheaper }) => {
     const text = document.createElement("p");
     text.classList.add("HeurekaBox__NotFound");
 
-    text.innerHTML = `Přesvědčte se sami <a href="https://www.heureka.${tld}/?h[fraze]=${productName}">přímo ve srovnávači</a>.`;
+    text.innerHTML = `Přesvědčte se sami <a href="https://www.heureka.${heurekaTld}/?h[fraze]=${productName}">přímo ve srovnávači</a>.`;
 
     box.appendChild(title);
     box.appendChild(text);
