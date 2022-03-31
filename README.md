@@ -18,17 +18,21 @@ Rozšíření vzniklo pro usnadnění vyhledávání a porovnávání cen produk
 
 ### Podporované eshopy
 
-[//]: # (Run `npm run generate-readme` to update this)
+[//]: # (Run `npm run generate-info` to update this)
 
 - [x] [ab-com.cz](https://www.ab-com.cz)
 - [x] [alfa.cz](https://www.alfa.cz)
 - [x] [alza.cz](https://www.alza.cz), [alza.sk](https://www.alza.sk)
 - [x] [benu.cz](https://www.benu.cz)
+- [x] [bike-components.de](https://www.bike-components.de)
+- [x] [bike-discount.de](https://www.bike-discount.de)
 - [x] [bike-eshop.cz](https://www.bike-eshop.cz)
 - [x] [bike-life.cz](https://www.bike-life.cz)
+- [x] [bike24.com](https://www.bike24.com)
 - [x] [bikero.cz](https://www.bikero.cz)
 - [x] [booktook.cz](https://www.booktook.cz)
 - [x] [bscom.cz](https://www.bscom.cz)
+- [x] [chainreactioncycles.com](https://www.chainreactioncycles.com)
 - [x] [cycology.cz/](https://www.cycology.cz/)
 - [x] [cyklobella.cz](https://www.cyklobella.cz)
 - [x] [czc.cz](https://www.czc.cz)
