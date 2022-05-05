@@ -2,3 +2,4 @@
 extension-build/
 extension-dist/
 /cypress/other-extensions/unpacked/
+node_modules/
