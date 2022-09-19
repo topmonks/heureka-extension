@@ -82,5 +82,5 @@ But there is a **limitation**: We cannot guarantee that found product can be ord
 
 #### Search suggestions
 ```
-GET https://api.heureka.cz/head-gateway/search?term=:query
+GET https://api.heureka.cz/head-gateway/search/v2?query=:term
 ```

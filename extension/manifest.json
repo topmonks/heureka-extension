@@ -1,7 +1,7 @@
 {
   "name": "Porovnání cen",
   "manifest_version": 2,
-  "version": "22.3.31.1107",
+  "version": "22.9.19.1058",
   "description": "Ověřte si běžnou cenu produktu (uvedenou na Heureka) bez nutnosti opouštět prohlížený e-shop",
   "homepage_url": "https://github.com/topmonks/heureka-extension",
   "icons": {
