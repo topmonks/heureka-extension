@@ -1,20 +1,28 @@
 const scrawlers = require("./scrawlers");
 const { insert, parsePrice, log, getTlds } = require("./helpers");
+const { contentStyles } = require("./styles");
 
 (async () => {
   const scrawler = scrawlers[location.hostname.split(".").reverse()[1]];
 
   if (!scrawler) {
-    log("Website not supported (this shouldn't happen when permissions in manifest.json are correctly configured", { location });
+    log(
+      "Website not supported (this shouldn't happen when permissions in manifest.json are correctly configured",
+      { location }
+    );
     return; // Do not continue
   }
 
   log(`Testing whether we are on product page, selector: ${scrawler.test}`);
 
   if (typeof scrawler.test === "string") {
-    document.arrive(scrawler.test, { existing: true }, newElem => {
+    document.arrive(scrawler.test, { existing: true }, (newElem) => {
       // Run only once if there's multiple elements on the page
-      if (Array.from(document.querySelectorAll(scrawler.test)).indexOf(newElem) === 0) {
+      if (
+        Array.from(document.querySelectorAll(scrawler.test)).indexOf(
+          newElem
+        ) === 0
+      ) {
         log("Product page detected, continuing...");
         work(scrawler);
       }
@@ -29,13 +37,15 @@ const { insert, parsePrice, log, getTlds } = require("./helpers");
 
 async function work(scrawler, overrides = {}) {
   // Remove existing, important for some Single page applications
-  if (document.querySelector("#HeurekaContainer")) document.querySelector("#HeurekaContainer").remove();
+  if (document.querySelector("#HeurekaContainer"))
+    document.querySelector("#HeurekaContainer").remove();
 
   let name;
   try {
-    name = typeof scrawler.name === "function"
-      ? scrawler.name()
-      : document.querySelector(scrawler.name).innerText;
+    name =
+      typeof scrawler.name === "function"
+        ? scrawler.name()
+        : document.querySelector(scrawler.name).innerText;
   } catch (e) {
     log("Getting `name` failed:", e);
     return; // Do not continue
@@ -43,9 +53,12 @@ async function work(scrawler, overrides = {}) {
 
   let price;
   try {
-    price = typeof scrawler.price === "function"
-      ? scrawler.price()
-      : parsePrice(document.querySelector(scrawler.price).innerText).toFixed(0);
+    price =
+      typeof scrawler.price === "function"
+        ? scrawler.price()
+        : parsePrice(document.querySelector(scrawler.price).innerText).toFixed(
+            0
+          );
   } catch (e) {
     log("Getting `price` failed:", e);
     // Continue even without price
@@ -56,8 +69,8 @@ async function work(scrawler, overrides = {}) {
     query: "SEARCH",
     payload: {
       name,
-      apiUrl: `https://api.heureka.${heurekaTld}`
-    }
+      apiUrl: `https://api.heureka.${heurekaTld}`,
+    },
   });
 
   if (!foundProducts.length) {
@@ -66,13 +79,18 @@ async function work(scrawler, overrides = {}) {
 
   const heurekaPrices =
     foundProducts.length > 0
-      ? foundProducts.map(product => parsePrice(product.price))
+      ? foundProducts.map((product) => parsePrice(product.min_price))
       : [];
 
-  log("Summary", { productName: name, productPrice: price, heurekaPrices, foundProducts });
+  log("Summary", {
+    productName: name,
+    productPrice: price,
+    heurekaPrices,
+    foundProducts,
+  });
 
   const productsAreNotCheaper =
-    Boolean(heurekaPrices.find(x => x < price)) === false;
+    Boolean(heurekaPrices.find((x) => x <= price)) === false;
 
   if (productsAreNotCheaper) {
     log("Products are not cheaper", { price });
@@ -82,25 +100,24 @@ async function work(scrawler, overrides = {}) {
   try {
     let { target } = scrawler.render;
     if (typeof target === "function") target = target();
-    boxRoot = insert(
-      target,
-      scrawler.render.position,
-      {
-        id: "HeurekaContainer",
-        style: scrawler.render.style
-      }
-    );
+    boxRoot = insert(target, scrawler.render.position, {
+      id: "HeurekaContainer",
+      style: scrawler.render.style,
+    });
   } catch (e) {
     console.warn("Inserting widget into DOM failed:", e);
     return; // Do not continue
   }
-
-  boxRoot.appendChild(makeHeurekaBox({
-    products: foundProducts,
-    productsAreNotCheaper,
-    productName: overrides.name || name,
-    scrawler, // pass for easier re-init when overriding TODO: This would deserve different architecture
-  }));
+  const shadow = boxRoot.attachShadow({ mode: "closed" });
+  shadow.appendChild(makeStyleElement());
+  shadow.appendChild(
+    makeHeurekaBox({
+      products: foundProducts,
+      productsAreNotCheaper,
+      productName: overrides.name || name,
+      scrawler, // pass for easier re-init when overriding TODO: This would deserve different architecture
+    })
+  );
 }
 
 /**
@@ -117,7 +134,21 @@ const extensionIcon = `
 `;
 /* eslint-enable max-len */
 
-const makeHeurekaBox = ({ productName, products, productsAreNotCheaper, scrawler }) => {
+function makeStyleElement() {
+  const element = document.createElement("style");
+  element.innerHTML = contentStyles;
+  // element.setAttribute("href", href);
+  // element.setAttribute("rel", "stylesheet");
+  // element.setAttribute("type", "text/css");
+  return element;
+}
+
+const makeHeurekaBox = ({
+  productName,
+  products,
+  productsAreNotCheaper,
+  scrawler,
+}) => {
   const box = document.createElement("div");
   const { originalTld, heurekaTld } = getTlds();
 
@@ -128,7 +159,8 @@ const makeHeurekaBox = ({ productName, products, productsAreNotCheaper, scrawler
 
   title.style.cursor = "pointer";
   title.onclick = () => {
-    const adjusted = window.prompt( // eslint-disable-line no-alert
+    const adjusted = window.prompt(
+      // eslint-disable-line no-alert
       "Upravte název produktu a zkuste to znovu",
       productName
     );
@@ -193,7 +225,12 @@ const makeHeurekaBox = ({ productName, products, productsAreNotCheaper, scrawler
     productCategory.classList.add("HeurekaBox__ProductCategory");
 
     const productPrice = document.createElement("span");
-    productPrice.innerText = product.price + " *";
+    const currency = new Intl.NumberFormat();
+    productPrice.innerText =
+      currency.format(product.min_price) +
+      ",- až " +
+      currency.format(product.max_price) +
+      ",- *";
     productPrice.classList.add("HeurekaBox__ProductPrice");
 
     const infoColumn = document.createElement("div");
@@ -204,7 +241,7 @@ const makeHeurekaBox = ({ productName, products, productsAreNotCheaper, scrawler
 
     const linkContainer = document.createElement("a");
     linkContainer.classList.add("HeurekaBox__ProductsList__Item");
-    linkContainer.href = product.desktop_url;
+    linkContainer.href = product.url;
 
     linkContainer.appendChild(productImage);
     linkContainer.appendChild(infoColumn);
@@ -218,7 +255,8 @@ const makeHeurekaBox = ({ productName, products, productsAreNotCheaper, scrawler
   const footer = document.createElement("div");
   footer.classList.add("HeurekaBox__Footer");
   const footerMoreInfo = document.createElement("div");
-  footerMoreInfo.innerHTML = "Více informací na <a href='https://github.com/topmonks/heureka-extension/'>GitHub</a>";
+  footerMoreInfo.innerHTML =
+    "Více informací na <a href='https://github.com/topmonks/heureka-extension/'>GitHub</a>";
   const footerDisclaimer = document.createElement("div");
   footerDisclaimer.innerHTML = "* cena vč. DPH a nemusí být konečná";
   footer.appendChild(footerMoreInfo);

@@ -29,9 +29,6 @@
         "arrive.js",
         "browser-polyfill.js",
         "content.js"
-      ],
-      "css": [
-        "content.css"
       ]
     }
   ]

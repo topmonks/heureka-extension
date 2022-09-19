@@ -1,4 +1,6 @@
-:root {
+// eslint-disable-next-line import/prefer-default-export
+export const contentStyles = `
+:host {
   --font-size: 16px;
   --line-height: calc(var(--font-size) + 2);
 
@@ -18,7 +20,7 @@
   margin: var(--spacing) 0;
   max-width: 1000px;
   border: 1px solid var(--color-border);
-  border-radius: var(--order-radius);
+  border-radius: var(--border-radius);
   background: var(--color-white);
 }
 
@@ -51,7 +53,7 @@
   line-height: var(--line-height);
 }
 
-.HeurekaBox__ProductsList .HeurekaBox__Item {
+.HeurekaBox__ProductsList__Item {
   display: flex;
   align-items: center;
   flex-direction: row;
@@ -60,7 +62,7 @@
   background-color: var(--color-white);
   text-decoration: none;
 }
-.HeurekaBox__ProductsList .HeurekaBox__Item .HeurekaBox:hover {
+.HeurekaBox:hover {
   background-color: #f4f4f4;
 }
 
@@ -72,6 +74,8 @@
 
 .HeurekaBox__ProductInfoColumn {
   flex: 1;
+  box-sizing: border-box;
+  padding: var(--spacing);
 }
 
 .HeurekaBox__ProductName {
@@ -105,3 +109,4 @@
   font-size: 10px;
 }
 
+`;

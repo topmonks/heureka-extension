@@ -20,11 +20,9 @@
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "test": "jest",
-
     "//publish": "Scripts for publishing",
     "update-version": "dot-json extension/manifest.json version $(date -u +%y.%-m.%-d.%-H%M)",
     "npm run tag-version-and-push-to-trigger-publish": "git push origin tag v$(dot-json extension/manifest.json version)",
-
     "//ci": "Scripts for CI",
     "build": "webpack --mode=production",
     "build:chrome": "npm run build && web-ext build --overwrite-dest --filename 'chrome-extension.zip'",

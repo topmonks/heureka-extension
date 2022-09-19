@@ -15,8 +15,8 @@ const scrawlers = {
   alza: {
     test: "#detailItem",
     name: "h1",
-    price: ".price_withVat, #prices .c2",
-    render: { target: ".priceDetail" },
+    price: ".price_withVat, #prices .c2, .price-box__price",
+    render: { target: ".priceDetail, .price-detail" },
     origin: "https://www.alza.{cz,sk}",
     exampleProductPath: "iphone-11?dq=5669250",
     exampleListingPath: "",
